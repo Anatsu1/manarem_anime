@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/formulario.css">
     <link rel="stylesheet" href="/static/css/contacto.css">
-    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/png">
+    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
     <script src="/static/js/api.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
@@ -36,23 +36,25 @@
             <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
         </nav>
     </header>
-    <section class="container">
-        <div class="formContainer">
-            <div class="info-form">
-                <h2>Contáctanos</h2>
-                <p>Si eres un otaku fanático del mundo anime, estás en el sitio adecuado, te esperamos. Tu tomodachi.</p>
-                <a href="#"><i class="fa fa-phone"></i> 11-733-456</a>
-                <a href="#"><i class="fa fa-envelope"></i> email@tudominio.com</a>
-                <a href="#"><i class="fa fa-map-marked"></i> Ciudad, Argentina</a>
+    <main>
+        <section class="container">
+            <div class="formContainer">
+                <div class="info-form">
+                    <h2>Contáctanos</h2>
+                    <p>Si eres un otaku fanático del mundo anime, estás en el sitio adecuado, te esperamos. Tu tomodachi.</p>
+                    <a href="#"><i class="fa fa-phone"></i> 11-733-456</a>
+                    <a href="#"><i class="fa fa-envelope"></i> email@tudominio.com</a>
+                    <a href="#"><i class="fa fa-map-marked"></i> Ciudad, Argentina</a>
+                </div>
+                <form id="formContacto" autocomplete="off">
+                    <input type="text" name="nombre" id="nombre" placeholder="Tu Nombre" class="campo" required>
+                    <input type="email" name="email" id="email" placeholder="Tu Email" class="campo" required>
+                    <textarea name="mensaje" id="mensaje" placeholder="Tu Mensaje..." required></textarea>
+                    <button type="submit" class="btn-enviar">Enviar Mensaje</button>
+                </form>
             </div>
-            <form id="formContacto" autocomplete="off">
-                <input type="text" name="nombre" id="nombre" placeholder="Tu Nombre" class="campo" required>
-                <input type="email" name="email" id="email" placeholder="Tu Email" class="campo" required>
-                <textarea name="mensaje" id="mensaje" placeholder="Tu Mensaje..." required></textarea>
-                <button type="submit" class="btn-enviar">Enviar Mensaje</button>
-            </form>
-        </div>
-    </section>
+        </section>
+    </main>
     <footer class="footer">
         <div class="footer-contenido">
             <p class="footer-copy">&copy; 2024 Manarem. Todos los derechos reservados.</p>

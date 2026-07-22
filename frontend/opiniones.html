@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/static/css/footer.css">
     <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/png">
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/app.js"></script>
     <title>Manarem - ¡Deja tus opiniones!</title>
 </head>
 <body>
@@ -241,8 +243,8 @@
                     <div class="avatar">
                         <img src="http://localhost/multimedia/relleno/img-c9.png" alt="img">
                     </div>
-                    <form action="#" method="post" class="inputs-comentarios">
-                        <textarea name="" class="area-comentario"></textarea>
+                    <form id="formOpinion" method="post" class="inputs-comentarios">
+                        <textarea name="mensaje" id="mensaje" class="area-comentario" placeholder="Escribí tu opinión..." required></textarea>
                         <div class="botones-comentar">
                             <div class="boton-subir-archivo">
                                 <label class="boton-file" for="adjuntar">
@@ -251,7 +253,7 @@
                                 </label>
                                 <input type="file" name="" value="" placeholder="" id="adjuntar">
                             </div>
-                            <button class="boton-enviar" type="sutmit">
+                            <button class="boton-enviar" type="submit">
                                 <i class="fas fa-paper-plane"></i>
                                 Enviar
                             </button>
@@ -355,5 +357,24 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.getElementById('formOpinion').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                mensaje: document.getElementById('mensaje').value
+            };
+            try {
+                const result = await api.opiniones.crear(data);
+                if (result.error) {
+                    showAlert('Error al enviar opinión: ' + result.error, 'error');
+                } else {
+                    showAlert('¡Opinión enviada correctamente!', 'success');
+                    document.getElementById('formOpinion').reset();
+                }
+            } catch (error) {
+                showAlert('No se pudo conectar con el servidor.', 'error');
+            }
+        });
+    </script>
 </body>
 </html>

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/formulario.css">
     <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/png">
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/app.js"></script>
     <title>Manarem - ¡Ingresa y Encuentra tus Animes, Mangas y Música!</title>
 </head>
 <body>
@@ -32,11 +34,11 @@
     </header>
     <section class="container">
         <div>
-            <form action="#" class="formContainer">
+            <form id="formLogin" class="formContainer">
                 <h3 class="boxHed">Iniciar Sesion</h3>
-                <label>Usuario</label><input type="text" class="inputData">
-                <label>Contraseña</label><input type="password" class="inputData">
-                <input type="submit" value="ENVIAR" class="boxFunc btn-enviar">
+                <label>Usuario</label><input type="text" id="usuario" class="inputData" required>
+                <label>Contraseña</label><input type="password" id="password" class="inputData" required>
+                <button type="submit" class="boxFunc btn-enviar">ENVIAR</button>
             </form>
         </div>
     </section>
@@ -53,5 +55,26 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.getElementById('formLogin').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                usuario: document.getElementById('usuario').value,
+                password: document.getElementById('password').value
+            };
+            try {
+                const result = await api.auth.login(data);
+                if (result.error) {
+                    showAlert('Credenciales incorrectas.', 'error');
+                } else {
+                    localStorage.setItem('user', JSON.stringify(result.usuario || result));
+                    showAlert('¡Inicio de sesión exitoso!', 'success');
+                    setTimeout(() => window.location.href = '/', 1500);
+                }
+            } catch (error) {
+                showAlert('No se pudo conectar con el servidor.', 'error');
+            }
+        });
+    </script>
 </body>
 </html>

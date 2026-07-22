@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/formulario.css">
     <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/png">
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/app.js"></script>
     <title>Manarem - ¡Registrate y Encuentra tus Animes, Mangas y Música!</title>
 </head>
 <body>
@@ -45,7 +47,7 @@
                 <a href="" class="Links_Sitios">(Link Vacio) Leer términos y condiciones</a>
                 <input type="checkbox" class="inputData" id="terminos">
                 <!-- Hacer el link con letra mas chica y el botón mas cerca -->
-                <button type="button" onclick="comprobar()" class="boxFunc btn-enviar">ENVIAR</button>
+                <button type="submit" class="boxFunc btn-enviar">ENVIAR</button>
             </form>
         </div>
     </section>
@@ -62,6 +64,32 @@
             </div>
         </div>
     </footer>
-    <script src="/static/js/formularioRegistro.js"></script>
+    <script>
+        document.getElementById('formulario').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                nombre: document.getElementById('Nombre').value,
+                usuario: document.getElementById('Usuario').value,
+                email: document.getElementById('Email').value,
+                password: document.getElementById('password').value,
+                password2: document.getElementById('password2').value
+            };
+            if (data.password !== data.password2) {
+                showAlert('Las contraseñas no coinciden.', 'error');
+                return;
+            }
+            try {
+                const result = await api.auth.registro(data);
+                if (result.error) {
+                    showAlert('Error: ' + result.error, 'error');
+                } else {
+                    showAlert('¡Registro exitoso! Ahora podés iniciar sesión.', 'success');
+                    setTimeout(() => window.location.href = '/ingresar', 2000);
+                }
+            } catch (error) {
+                showAlert('No se pudo conectar con el servidor. Verificá que el backend esté funcionando.', 'error');
+            }
+        });
+    </script>
 </body>
 </html>

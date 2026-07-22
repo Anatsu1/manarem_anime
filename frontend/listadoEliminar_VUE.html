@@ -8,19 +8,31 @@
     <title>Eliminar Productos 🚀</title>
     <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/products_CRUD.css">
+    <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
 </head>
 
 <body>
     <header>
-        <nav class="navbar-index ">
-            <img class="logo-nav" src="/static/imagenes/logos-nav.webp" alt="logo agencia de aprendizaje">
-        </nav>
+        <div class="head-grid-container">
+            <h2 id="icono">Manarem</h2>
+            <a class="hipervin"  id="h_home" href="/">Home</a>
+            <a class="hipervin"  id="h_recomendados" href="/recomend">Recomendados</a>
+            <a class="hipervin"  id="h_musica" href="/musica">Musica</a>
+            <a class="hipervin"  id="h_productos" href="/productos">Productos</a>
+            <div id="h_divotros" class="drop_otros">
+                <div class="hipervin" id="h_otros">Otros</div>
+                <div class="drop_otros_conten">
+                    <a class="hipervin" href="/acerca-de">Acerca de</a>
+                    <a class="hipervin" href="/contacto">Contacto</a>
+                    <a class="hipervin" href="/preguntas-frecuentes">Preguntas Frecuentes</a>
+                    <a class="hipervin" href="/opiniones">Opiniones</a>
+                </div>
+            </div> 
+            <a class="hipervin"  id="h_ingresar" href="/ingresar">Ingresar</a>
+            <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
+        </div>
     </header>
-
-    <div class="logo-centrado">
-        <img src="/static/imagenes/logo_Codo.jpg" alt="logo">
-    </div>
     <h1>Eliminar Productos del Inventario</h1><br>
 
     <table> <!-- Se crea una tabla para mostrar los productos. -->

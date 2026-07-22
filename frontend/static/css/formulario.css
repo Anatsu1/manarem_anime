@@ -15,14 +15,13 @@
     background-color: var(--form-bg);
     border-radius: 16px;
     box-shadow: 0 8px 24px var(--shadow-color);
-    color: white;
+    color: var(--letter-color);
     width: 100%;
     max-width: 500px;
     padding: 30px;
 }
 
 .formContainer h3 {
-    font-family: fonstar;
     text-align: center;
     margin-bottom: 20px;
     font-size: 1.5rem;
@@ -42,8 +41,8 @@
     margin-bottom: 6px;
     border: 1px solid var(--border-light);
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    color: white;
+    background: var(--input-bg);
+    color: var(--letter-color);
     font-size: 1rem;
     outline: none;
     transition: border-color 0.2s;
@@ -58,7 +57,6 @@
     width: 100%;
     padding: 14px;
     margin-top: 16px;
-    font-family: fonstar;
     font-size: 1.1rem;
     border: 1px solid var(--accent-color);
     background: transparent;
@@ -70,15 +68,19 @@
 
 .formContainer .btn-enviar:hover {
     background-color: var(--accent-color);
-    color: white;
+    color: var(--letter-color);
 }
 
 .inputError {
-    border-color: #f44336 !important;
+    border-color: var(--error-color) !important;
 }
 
 .inputExito {
-    border-color: #4caf50 !important;
+    border-color: var(--success-color) !important;
+}
+
+.formContainer input[type="checkbox"] {
+    accent-color: var(--accent-color);
 }
 
 .formContainer li {

@@ -32,12 +32,12 @@
     </header>
     <section class="container">
         <div>
-            <form class="formContainer" id="formulario">
+            <form class="formContainer" id="formulario" enctype="multipart/form-data">
                 <h3 class="boxHed">Registrarse</h3>
                 <div>Nombre<li id="caracteres-Nombre">Caracteres permitidos: a-z/A-Z</li><li id="formulario__input-Nombre"></li></div><input type="text" class="inputData" id="Nombre" name="Nombre" placeholder="Tu Nombre">
                 <div>Usuario<li id="caracteres-Usuario">Caracteres permitidos: a-z/A-Z/_/-</li><li id="formulario__input-Usuario"></li></div><input type="text" class="inputData" id="Usuario" name="Usuario" placeholder="Tu Usuario">
                 <div>Email<li id="caracteres-Email">Caracteres permitidos: a-z/A-Z/@/.</li><li id="formulario__input-Email"></li></div><input type="text" class="inputData" id="Email" name="Email" placeholder="Tu Email">
-                <div>Imagen<li id="formulario__input-Imagen">(opcional)</li></div><input type="file" class="inputData" value="">
+                <div>Imagen<li id="formulario__input-Imagen">(opcional)</li></div><input type="file" class="inputData" id="imagen" name="imagen">
                 <div>Contraseña<li id="caracteres-password">Caracteres permitidos: Cualquiera</li><li id="formulario__input-password"></li></div><input type="password" class="inputData" id="password" name="password" placeholder="Tu Contraseña">
                 <div>Repetir Contraseña<li id="formulario__input-password2"></li></div><input type="password" class="inputData" id="password2" name="password2" placeholder="Repetir(Contraseña)">
                 <label>Aceptar términos y condiciones</label>
@@ -45,7 +45,7 @@
                 <a href="" class="Links_Sitios">(Link Vacio) Leer términos y condiciones</a>
                 <input type="checkbox" class="inputData" id="terminos">
                 <!-- Hacer el link con letra mas chica y el botón mas cerca -->
-                <buttom onclick="comprobar()" class="boxFunc btn-enviar">ENVIAR</buttom>
+                <button type="button" onclick="comprobar()" class="boxFunc btn-enviar">ENVIAR</button>
             </form>
         </div>
     </section>

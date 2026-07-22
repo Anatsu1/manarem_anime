@@ -1,28 +1,28 @@
-#icono{grid-area: titulo;}
-#h_home {grid-area: home;}
-#h_recomendados {grid-area: recomendados;}
-#h_musica {grid-area: musica;}
-#h_productos {grid-area: productos;}
-#h_divotros {grid-area: otros;}
-#h_ingresar {grid-area: ingresar;}
-#h_registrarse {grid-area: registrarse;}
+#icono { grid-area: titulo; }
+#h_home { grid-area: home; }
+#h_recomendados { grid-area: recomendados; }
+#h_musica { grid-area: musica; }
+#h_productos { grid-area: productos; }
+#h_divotros { grid-area: otros; }
+#h_ingresar { grid-area: ingresar; }
+#h_registrarse { grid-area: registrarse; }
 
-header{
+header {
     top: 0;
     position: sticky;
     z-index: 1000;
 }
+
 .head-grid-container {
     display: grid;
     height: 50px;
     padding: 10px;
     align-items: center;
     grid-template-areas:
-        /*6 columnas y 2 filas*/
         'titulo home recomendados musica productos otros ingresar ingresar'
         'titulo home recomendados musica productos otros registrarse registrarse';
     font-family: fonstar;
-    background-color:var(--header-bg);
+    background-color: var(--header-bg);
     text-align: center;
 }
 
@@ -30,53 +30,59 @@ header{
     font-size: 2.4rem;
     color: transparent;
     text-align: center;
-    background: linear-gradient(to right,var(--header-letter),var(--letter-hover),white);
-    background-repeat: no-repeat;
-    background-position: center;
+    background: linear-gradient(to right, var(--header-letter), var(--letter-hover), white);
     background-clip: text;
 }
-.hipervin{
+
+.hipervin {
     text-decoration: none;
     color: var(--header-letter);
-    
+    transition: color 0.2s;
 }
-.hipervin:hover{
+
+.hipervin:hover {
     color: var(--letter-hover);
 }
 
-.drop_otros{
+.drop_otros {
     text-align: center;
     align-items: center;
     width: auto;
     position: relative;
-    z-index: 1000;
 }
-.drop_otros_conten{
-    background-color:var(--header-bg);
-    display: none;
+
+.drop_otros_conten {
+    background-color: var(--header-bg);
     position: absolute;
     width: 100%;
-    box-shadow: 0px 10px 10px 0px rgba(179, 4, 135, 0.4);
+    min-width: 160px;
+    box-shadow: 0 8px 16px var(--shadow-color);
     color: var(--header-letter);
-}
-.drop_otros:hover .drop_otros_conten{
-    display: block;
-}
-.drop_otros_conten a{
-    display: block;
-    padding: 6px;
-    text-decoration: none;
-}
-.drop_otros_conten a:hover{
-    color: var(--letter-hover);
-    background-color: #f36fdd;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
 }
 
+.drop_otros:hover .drop_otros_conten {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.drop_otros_conten a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.drop_otros_conten a:hover {
+    color: var(--letter-hover);
+    background-color: rgba(255, 190, 255, 0.1);
+}
 
 @media only screen and (min-width: 520px) and (max-width: 900px) {
-    header{
-        position: static;
-    }
     .head-grid-container {
         grid-template-areas:
             'titulo titulo titulo'
@@ -84,12 +90,13 @@ header{
             'recomendados otros registrarse';
         height: auto;
         gap: 15px;
-
     }
-    #icono{
+
+    #icono {
         font-size: 2rem;
     }
 }
+
 @media screen and (max-width: 520px) {
     .head-grid-container {
         grid-template-areas:
@@ -98,10 +105,11 @@ header{
             'ingresar musica'
             'registrarse otros';
         height: auto;
-        gap: 15px;
+        gap: 12px;
         font-size: 0.6rem;
     }
-    #icono{
+
+    #icono {
         font-size: 1.8rem;
     }
 }

@@ -1,38 +1,24 @@
 # Manarem - Recomendaciones de Anime, Manga y Música
 
-Plataforma web para descubrir y recomendar animes, mangas y música relacionada. Proyecto full-stack con frontend estático desplegado en Vercel y backend API REST en preparación.
-
-## Arquitectura
-
-```
-┌─────────────────┐          ┌─────────────────────────┐
-│    VERCEL       │   fetch  │   VPS Oracle Cloud      │
-│  Frontend       │ ───────► │   Docker + Traefik      │
-│  HTML/CSS/JS    │   JSON   │   Flask + PostgreSQL    │
-│  Estático       │ ◄─────── │   (próximamente)        │
-└─────────────────┘          └─────────────────────────┘
-```
+Plataforma web para descubrir y recomendar animes, mangas y música relacionada.
 
 ## Tecnologías
 
-### Frontend (desplegado en Vercel)
+### Frontend
 - **HTML5** - Estructura semántica
 - **CSS3** - Diseño responsive con Grid y Flexbox
-- **JavaScript vanilla** - Sin frameworks, comunicación con API REST
+- **JavaScript vanilla** - Sin frameworks
 - **Font Awesome** - Iconos
 
-### Backend (en preparación para VPS)
-- **Python 3** + **Flask** - API REST
+### Backend (en desarrollo)
+- **Python** + **Flask** - API REST
 - **PostgreSQL** - Base de datos
-- **Docker** + **Docker Compose** - Contenedores
-- **Traefik** - Proxy inverso
-- **Cloudflare** - DNS y CDN
 
 ## Estructura del proyecto
 
 ```
 manarem_anime/
-├── frontend/                   # Frontend para Vercel
+├── frontend/                   # Frontend
 │   ├── index.html              # Página principal
 │   ├── recomend.html           # Recomendaciones de anime/manga
 │   ├── musica.html             # Música de anime
@@ -51,50 +37,25 @@ manarem_anime/
 │   ├── listadoEliminar_VUE.html# Eliminar (Vue.js)
 │   ├── vercel.json             # Configuración de Vercel
 │   ├── static/
-│   │   ├── css/                # 12 hojas de estilo
-│   │   ├── js/                 # Scripts (api.js, app.js, etc.)
-│   │   └── img/                # Imágenes del sitio
+│   │   ├── css/                # Hojas de estilo
+│   │   ├── js/                 # Scripts
+│   │   └── img/                # Imágenes
 │   └── assets/
 │       └── fonts/              # Fuentes tipográficas
-├── app.py                      # Backend Flask (próximamente)
+├── app.py                      # Backend Flask
 ├── requirements.txt            # Dependencias Python
-├── .env.example                # Variables de entorno
 ├── .gitignore
 └── README.md
 ```
 
-## Desarrollo local
-
-### Frontend (Vercel)
-
-1. Clonar el repositorio
-2. Abrir `frontend/index.html` en el navegador
-3. O usar Live Server en VS Code
-
-### Backend (VPS - próximamente)
-
-```bash
-# Próximamente: instrucciones de despliegue con Docker
-```
-
-## Despliegue
-
-### Vercel
-
-El frontend se despliega automáticamente desde GitHub en [manarem.vercel.app](https://manarem.vercel.app).
-
-1. Conectá el repositorio en Vercel
-2. Configurá `Root Directory` como `frontend`
-3. Configurá la variable de entorno `VITE_API_URL` con la URL del backend
-
 ## Funcionalidades
 
 - Catálogo de animes y mangas recomendados con enlaces a streaming
-- Reproductor de música de anime (embeds de YouTube)
+- Reproductor de música de anime
 - CRUD completo de productos con carga de imágenes
 - Formularios de registro e inicio de sesión
 - Sistema de opiniones y comentarios
-- Diseño responsive adaptado a dispositivos móviles
+- Diseño responsive
 
 ## Autores
 

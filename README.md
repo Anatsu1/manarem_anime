@@ -65,4 +65,4 @@ manarem_anime/
 
 ## Licencia
 
-© 2025 Manarem. Todos los derechos reservados.
+© 2024 Manarem. Todos los derechos reservados.

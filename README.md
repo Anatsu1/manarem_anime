@@ -1,61 +1,112 @@
-# Manarem - Recomendaciones de Anime, Manga y Música
+# Manarem
 
 Plataforma web para descubrir y recomendar animes, mangas y música relacionada.
 
-## Tecnologías
+## Stack
 
 ### Frontend
-- **HTML5** - Estructura semántica
-- **CSS3** - Diseño responsive con Grid y Flexbox
-- **JavaScript vanilla** - Sin frameworks
-- **Font Awesome** - Iconos
+- **HTML5** + **CSS3** (Grid, Flexbox, custom properties)
+- **JavaScript vanilla** + **Vue.js 3** (2 páginas CRUD)
+- **Font Awesome** (iconos)
 
-### Backend (en desarrollo)
-- **Python** + **Flask** - API REST
-- **PostgreSQL** - Base de datos
+### Backend
+- **Python 3** + **Flask** (API REST)
+- **MySQL** (migrando a PostgreSQL)
+- **Werkzeug** (subida de archivos)
 
-## Estructura del proyecto
+## Inicio rápido
+
+```bash
+git clone <repo>
+cd manarem_anime
+python -m venv venv
+source venv/bin/activate
+pip install Flask flask-cors mysql-connector-python Werkzeug
+python app.py
+```
+
+Servidor en `http://localhost:5000`. Frontend en `frontend/`.
+
+## Estructura
 
 ```
 manarem_anime/
-├── frontend/                   # Frontend
-│   ├── index.html              # Página principal
-│   ├── recomend.html           # Recomendaciones de anime/manga
-│   ├── musica.html             # Música de anime
-│   ├── registrarse.html        # Registro de usuarios
-│   ├── ingresar.html           # Inicio de sesión
-│   ├── contacto.html           # Formulario de contacto
-│   ├── opiniones.html          # Opiniones de usuarios
-│   ├── preg_frec.html          # Preguntas frecuentes
-│   ├── acerca_de.html          # Información del proyecto
-│   ├── productos.html          # Menú CRUD de productos
-│   ├── altas.html              # Alta de productos
-│   ├── listado.html            # Listado de productos
-│   ├── modificaciones.html     # Modificar productos
-│   ├── listadoEliminar.html    # Eliminar productos
-│   ├── modificaciones_VUE.html # Modificar (Vue.js)
-│   ├── listadoEliminar_VUE.html# Eliminar (Vue.js)
-│   ├── vercel.json             # Configuración de Vercel
-│   ├── static/
-│   │   ├── css/                # Hojas de estilo
-│   │   ├── js/                 # Scripts
-│   │   └── img/                # Imágenes
-│   └── assets/
-│       └── fonts/              # Fuentes tipográficas
-├── app.py                      # Backend Flask
-├── requirements.txt            # Dependencias Python
-├── .gitignore
-└── README.md
+├── agents/                    # Planificación de tareas (local)
+├── frontend/
+│   ├── index.html             # Home
+│   ├── recomend.html          # Recomendaciones
+│   ├── musica.html            # Música anime
+│   ├── registrarse.html       # Registro
+│   ├── ingresar.html          # Login
+│   ├── contacto.html          # Contacto
+│   ├── opiniones.html         # Opiniones
+│   ├── preg_frec.html         # FAQ
+│   ├── acerca_de.html         # Acerca de
+│   ├── productos.html         # CRUD menú
+│   ├── altas.html             # Alta producto
+│   ├── listado.html           # Listado producto
+│   ├── modificaciones.html    # Modificar producto
+│   ├── listadoEliminar.html   # Eliminar producto
+│   ├── modificaciones_VUE.html# Modificar (Vue)
+│   ├── listadoEliminar_VUE.html# Eliminar (Vue)
+│   ├── vercel.json            # Rutas Vercel
+│   ├── static/css/            # 12 hojas de estilo
+│   ├── static/js/             # api.js, app.js
+│   ├── static/img/            # Imágenes
+│   └── assets/fonts/          # Alkatra + Fonstars
+├── app.py                     # Flask backend
+├── README.md
+└── .gitignore
 ```
 
-## Funcionalidades
+## Páginas
 
-- Catálogo de animes y mangas recomendados con enlaces a streaming
-- Reproductor de música de anime
-- CRUD completo de productos con carga de imágenes
-- Formularios de registro e inicio de sesión
-- Sistema de opiniones y comentarios
-- Diseño responsive
+| Ruta | Archivo |
+|---|---|
+| `/` | index.html |
+| `/recomend` | recomend.html |
+| `/musica` | musica.html |
+| `/ingresar` | ingresar.html |
+| `/registrarse` | registrarse.html |
+| `/contacto` | contacto.html |
+| `/opiniones` | opiniones.html |
+| `/preguntas-frecuentes` | preg_frec.html |
+| `/acerca-de` | acerca_de.html |
+| `/productos` | productos.html |
+| `/productos/altas` | altas.html |
+| `/productos/listado` | listado.html |
+| `/productos/modificar` | modificaciones.html |
+| `/productos/eliminar` | listadoEliminar.html |
+
+## API
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/productos` | Listar productos |
+| GET | `/productos/<codigo>` | Obtener producto |
+| POST | `/productos` | Crear producto |
+| PUT | `/productos/<codigo>` | Modificar producto |
+| DELETE | `/productos/<codigo>` | Eliminar producto |
+
+## Identidad visual
+
+Paleta oscura con acentos púrpura y rosa neón.
+
+| Variable | Valor | Uso |
+|---|---|---|
+| `--accent-color` | `#9e4c9e` | Botones, bordes, hover |
+| `--letter-color` | `#ffbeff` | Texto principal |
+| `--letter-hover` | `#60fdbc` | Hover links |
+| `--header-bg` | `#15003d` | Header, footer |
+| `--body-color` | `#0a1641` | Fondo de página |
+| `--main-bg` | `#0d062c` | Cards, contenido |
+| `--form-bg` | `#2c1a80` | Formularios, tablas |
+| `--border-light` | `rgba(255,190,255,0.15)` | Bordes |
+| `--shadow-color` | `rgba(0,0,0,0.3)` | Sombras |
+
+**Fuentes:** Alkatra (cuerpo), Fonstars (títulos).
+**Breakpoints:** 520px (mobile), 900px (tablet), 1200px (desktop).
+**Patrones:** CSS Grid, sticky header, cards con hover lift, glassmorphism, hero animado con keyframes.
 
 ## Autores
 

@@ -1,3 +1,11 @@
+@keyframes cambiar {
+    0% { background-image: url("../img/reel1.jpg"); }
+    25% { background-image: url("../img/reel2.jpg"); }
+    50% { background-image: url("../img/reel3.jpg"); }
+    75% { background-image: url("../img/reel4.jpg"); }
+    100% { background-image: url("../img/reel5.jpg"); }
+}
+
 #reel {
     text-align: center;
     border-radius: 16px;

@@ -1,16 +1,14 @@
 :root {
-    --primary-color: #15003d;
-    --secondary-color: #514e80;
-    --accent-color: rgb(158, 76, 158);
-    --letter-color: rgb(255, 190, 255);
+    --accent-color: #9e4c9e;
+    --letter-color: #ffbeff;
     --letter-hover: #60fdbc;
     --header-bg: #15003d;
-    --header-letter: rgb(255, 190, 255);
     --body-color: #0a1641;
-    --main-bg: rgb(13, 6, 44);
-    --card-bg: transparent;
-    --card-border: rgb(158, 76, 158);
+    --main-bg: #0d062c;
     --form-bg: #2c1a80;
     --shadow-color: rgba(0, 0, 0, 0.3);
     --border-light: rgba(255, 190, 255, 0.15);
+    --error-color: #f44336;
+    --success-color: #4caf50;
+    --input-bg: rgba(255, 255, 255, 0.05);
 }

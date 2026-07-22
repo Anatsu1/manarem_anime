@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/static/css/header.css">
     <script src="/static/js/api.js"></script>
     <script src="/static/js/app.js"></script>
+    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -36,6 +37,7 @@
             <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
         </div>
     </header>
+    <main>
     <h1>Agregar Productos al Inventario</h1><br>
 
     <!--enctype="multipart/form-data" es necesario para enviar archivos al back.-->
@@ -60,6 +62,7 @@
         <button type="submit">Agregar Producto</button>
         <a href="/productos">Menu principal</a>
     </form>
+    </main>
 
     <script>
         document.getElementById('formulario').addEventListener('submit', async (e) => {

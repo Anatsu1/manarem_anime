@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/static/css/header.css">
     <script src="/static/js/api.js"></script>
     <script src="/static/js/app.js"></script>
+    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -36,6 +37,7 @@
             <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
         </div>
     </header>
+    <main>
     <h1>Modificar Productos del Inventario</h1><br>
 
     <!-- Contenedor principal que será controlado por JavaScript. Este contenedor tendrá dos formularios. -->
@@ -79,6 +81,7 @@
             </form>
         </div>
     </div>
+    </main>
 
     <script>
         let codigo = '';
@@ -121,7 +124,7 @@
 
                 const imagenActual = document.getElementById('imagen-actual');
                 if (imagen_url && !imagenSeleccionada) {
-                    imagenActual.src = '/static/imagenes/' + imagen_url;
+                    imagenActual.src = '/static/img/' + imagen_url;
                     imagenActual.style.display = 'block';
                 } else {
                     imagenActual.style.display = 'none';

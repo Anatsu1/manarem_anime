@@ -1,49 +1,118 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: calc(100vh - 50px);
+    padding: 20px;
+    background: url(../img/fondo.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
-.formContainer{
-    width: 900px;
+.formContainer {
+    width: 100%;
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    background-color: var(--form-bg);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 24px var(--shadow-color);
 }
 
-.container h2{
+.info-form h2 {
     margin-bottom: 15px;
-    font-size: 35px
+    font-size: 1.8rem;
+    color: var(--letter-color);
+    font-family: fonstar;
 }
-.container p{
-    font-size: 17px;
+
+.info-form p {
+    font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 30px;
+    opacity: 0.9;
 }
 
-.container a{
-    font-size: 17px;
+.info-form a {
+    font-size: 0.95rem;
     display: inline-block;
     text-decoration: none;
     width: 100%;
     margin-bottom: 15px;
-    color: black;
-    font-weight: 700;
+    color: var(--letter-color);
+    transition: opacity 0.2s;
 }
-.container a i{
-    color: rgb(73, 7, 73);
+
+.info-form a:hover {
+    opacity: 0.7;
+}
+
+.info-form a i {
+    color: var(--accent-color);
     margin-right: 10px;
 }
-.container form .campo, textarea{
+
+.container form .campo,
+.container form textarea {
     width: 100%;
-    padding: 15px 10px;
-    font-size: 16px;
-    border: 1px solid #dbdbdb;
-    margin-bottom: 20px;
-    border-radius: 3px;
-    outline: 0px;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid var(--border-light);
+    margin-bottom: 16px;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
 }
-.container form textarea{
-    max-width: 530px;
-    min-width: 530px;
+
+.container form .campo:focus,
+.container form textarea:focus {
+    border-color: var(--accent-color);
+}
+
+.container form textarea {
     min-height: 140px;
-    max-height: 150px;
+    max-height: 200px;
+    resize: vertical;
+}
+
+.container form .btn-enviar {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-family: fonstar;
+    border: 1px solid var(--accent-color);
+    background: transparent;
+    color: var(--letter-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.container form .btn-enviar:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+@media screen and (max-width: 700px) {
+    .formContainer {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .container {
+        padding: 10px;
+    }
+
+    .formContainer {
+        padding: 20px;
+    }
 }

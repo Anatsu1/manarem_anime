@@ -19,9 +19,8 @@ header {
     padding: 10px;
     align-items: center;
     grid-template-areas:
-        'titulo home recomendados musica productos otros ingresar ingresar'
-        'titulo home recomendados musica productos otros registrarse registrarse';
-    font-family: fonstar;
+        'titulo home recomendados musica productos otros ingresar registrarse';
+    font-family: 'fonstar';
     background-color: var(--header-bg);
     text-align: center;
 }
@@ -38,10 +37,26 @@ header {
     text-decoration: none;
     color: var(--letter-color);
     transition: color 0.2s;
+    position: relative;
+}
+
+.hipervin::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--letter-hover);
+    transition: width 0.3s;
 }
 
 .hipervin:hover {
     color: var(--letter-hover);
+}
+
+.hipervin:hover::after {
+    width: 100%;
 }
 
 .drop_otros {
@@ -60,8 +75,8 @@ header {
     color: var(--letter-color);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-4px);
-    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    transform: translateY(-8px);
+    transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
 }
 
 .drop_otros:hover .drop_otros_conten {
@@ -79,15 +94,16 @@ header {
 
 .drop_otros_conten a:hover {
     color: var(--letter-hover);
-    background-color: rgba(255, 190, 255, 0.1);
+    background-color: var(--border-light);
 }
 
 @media only screen and (min-width: 520px) and (max-width: 900px) {
     .head-grid-container {
         grid-template-areas:
             'titulo titulo titulo'
-            'home musica ingresar'
-            'recomendados otros registrarse';
+            'home recomendados musica'
+            'productos otros ingresar'
+            '. . registrarse';
         height: auto;
         gap: 15px;
     }
@@ -102,8 +118,9 @@ header {
         grid-template-areas:
             'titulo titulo'
             'home recomendados'
-            'ingresar musica'
-            'registrarse otros';
+            'musica productos'
+            'ingresar otros'
+            '. registrarse';
         height: auto;
         gap: 12px;
         font-size: 0.6rem;

@@ -9,7 +9,7 @@ const HEADER_HTML = `
             <a class="nav-link" href="/">Home</a>
             <a class="nav-link" href="/recomend">Recomendados</a>
             <a class="nav-link" href="/musica">Música</a>
-            <a class="nav-link" href="/productos">Productos</a>
+            <a class="nav-link" href="/foro">Foro</a>
             <div class="nav-drop">
                 <button class="nav-link nav-drop-btn" aria-expanded="false">Otros ▾</button>
                 <div class="nav-drop-panel">

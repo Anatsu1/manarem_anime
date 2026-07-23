@@ -1,274 +1,230 @@
-#--------------------------------------------------------------------
-# Instalar con pip install Flask
-from flask import Flask, request, jsonify, render_template
-from flask import request
-
-# Instalar con pip install flask-cors
-from flask_cors import CORS
-
-# Instalar con pip install mysql-connector-python
-import mysql.connector
-
-# Si es necesario, pip install Werkzeug
-from werkzeug.utils import secure_filename
-
-# No es necesario instalar, es parte del sistema standard de Python
 import os
-import time
-#--------------------------------------------------------------------
+import sqlite3
+import uuid
+from datetime import date
 
-
+from flask import Flask, request, jsonify, g
+from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-CORS(app)  # Esto habilitará CORS para todas las rutas
+CORS(app)
 
-#--------------------------------------------------------------------
-class Catalogo:
-    #----------------------------------------------------------------
-    # Constructor de la clase
-    def __init__(self, host, user, password, database):
-        # Primero, establecemos una conexión sin especificar la base de datos
-        self.conn = mysql.connector.connect(
-            host=host,
-            user=user,
-            password=password
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'manarem.db')
+
+CATEGORIAS_VALIDAS = ['anime', 'manga', 'musica', 'general']
+
+
+def get_db():
+    if 'db' not in g:
+        g.db = sqlite3.connect(DB_PATH)
+        g.db.row_factory = sqlite3.Row
+    return g.db
+
+
+@app.teardown_appcontext
+def close_db(exception):
+    db = g.pop('db', None)
+    if db is not None:
+        db.close()
+
+
+def init_db():
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute('''CREATE TABLE IF NOT EXISTS usuarios(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario TEXT UNIQUE NOT NULL,
+            email TEXT NOT NULL,
+            password_hash TEXT NOT NULL,
+            creado TEXT NOT NULL
+        )''')
+        conn.execute('''CREATE TABLE IF NOT EXISTS sesiones(
+            token TEXT PRIMARY KEY,
+            usuario_id INTEGER NOT NULL REFERENCES usuarios(id),
+            creado TEXT NOT NULL
+        )''')
+        conn.execute('''CREATE TABLE IF NOT EXISTS temas(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            titulo TEXT NOT NULL,
+            categoria TEXT NOT NULL,
+            contenido TEXT NOT NULL,
+            autor_id INTEGER NOT NULL REFERENCES usuarios(id),
+            fecha TEXT NOT NULL
+        )''')
+        conn.execute('''CREATE TABLE IF NOT EXISTS respuestas(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tema_id INTEGER NOT NULL REFERENCES temas(id),
+            contenido TEXT NOT NULL,
+            autor_id INTEGER NOT NULL REFERENCES usuarios(id),
+            fecha TEXT NOT NULL
+        )''')
+        conn.commit()
+
+
+def usuario_actual(request):
+    auth = request.headers.get('Authorization', '')
+    if not auth.startswith('Bearer '):
+        return None
+    token = auth[7:]
+    db = get_db()
+    return db.execute(
+        'SELECT u.id, u.usuario, u.email FROM sesiones s JOIN usuarios u ON s.usuario_id = u.id WHERE s.token = ?',
+        (token,)
+    ).fetchone()
+
+
+init_db()
+
+
+@app.route('/registro', methods=['POST'])
+def registro():
+    data = request.get_json(silent=True) or {}
+    usuario = (data.get('usuario') or '').strip()
+    email = (data.get('email') or '').strip()
+    password = (data.get('password') or '').strip()
+
+    if not usuario or not email or not password:
+        return jsonify({'error': 'Todos los campos son obligatorios'}), 400
+
+    db = get_db()
+    try:
+        db.execute(
+            'INSERT INTO usuarios (usuario, email, password_hash, creado) VALUES (?, ?, ?, ?)',
+            (usuario, email, generate_password_hash(password), date.today().isoformat())
         )
-        self.cursor = self.conn.cursor()
+        db.commit()
+    except sqlite3.IntegrityError:
+        return jsonify({'error': 'El usuario ya existe'}), 409
 
-        # Intentamos seleccionar la base de datos
-        try:
-            self.cursor.execute(f"USE {database}")
-        except mysql.connector.Error as err:
-            # Si la base de datos no existe, la creamos
-            if err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
-                self.cursor.execute(f"CREATE DATABASE {database}")
-                self.conn.database = database
-            else:
-                raise err
-
-        # Una vez que la base de datos está establecida, creamos la tabla si no existe
-        self.cursor.execute('''CREATE TABLE IF NOT EXISTS productos (
-            codigo INT AUTO_INCREMENT PRIMARY KEY,
-            descripcion VARCHAR(255) NOT NULL,
-            cantidad INT NOT NULL,
-            precio DECIMAL(10, 2) NOT NULL,
-            imagen_url VARCHAR(255),
-            proveedor INT(4))''')
-        self.conn.commit()
-
-        # Cerrar el cursor inicial y abrir uno nuevo con el parámetro dictionary=True
-        self.cursor.close()
-        self.cursor = self.conn.cursor(dictionary=True)
-        
-    #----------------------------------------------------------------
-    def agregar_producto(self, descripcion, cantidad, precio, imagen, proveedor):
-               
-        sql = "INSERT INTO productos (descripcion, cantidad, precio, imagen_url, proveedor) VALUES (%s, %s, %s, %s, %s)"
-        valores = (descripcion, cantidad, precio, imagen, proveedor)
-
-        self.cursor.execute(sql, valores)        
-        self.conn.commit()
-        return self.cursor.lastrowid
-
-    #----------------------------------------------------------------
-    def consultar_producto(self, codigo):
-        # Consultamos un producto a partir de su código
-        self.cursor.execute(f"SELECT * FROM productos WHERE codigo = {codigo}")
-        return self.cursor.fetchone()
-
-    #----------------------------------------------------------------
-    def modificar_producto(self, codigo, nueva_descripcion, nueva_cantidad, nuevo_precio, nueva_imagen, nuevo_proveedor):
-        sql = "UPDATE productos SET descripcion = %s, cantidad = %s, precio = %s, imagen_url = %s, proveedor = %s WHERE codigo = %s"
-        valores = (nueva_descripcion, nueva_cantidad, nuevo_precio, nueva_imagen, nuevo_proveedor, codigo)
-        self.cursor.execute(sql, valores)
-        self.conn.commit()
-        return self.cursor.rowcount > 0
-
-    #----------------------------------------------------------------
-    def listar_productos(self):
-        self.cursor.execute("SELECT * FROM productos")
-        productos = self.cursor.fetchall()
-        return productos
-
-    #----------------------------------------------------------------
-    def eliminar_producto(self, codigo):
-        # Eliminamos un producto de la tabla a partir de su código
-        self.cursor.execute(f"DELETE FROM productos WHERE codigo = {codigo}")
-        self.conn.commit()
-        return self.cursor.rowcount > 0
-
-    #----------------------------------------------------------------
-    def mostrar_producto(self, codigo):
-        # Mostramos los datos de un producto a partir de su código
-        producto = self.consultar_producto(codigo)
-        if producto:
-            print("-" * 40)
-            print(f"Código.....: {producto['codigo']}")
-            print(f"Descripción: {producto['descripcion']}")
-            print(f"Cantidad...: {producto['cantidad']}")
-            print(f"Precio.....: {producto['precio']}")
-            print(f"Imagen.....: {producto['imagen_url']}")
-            print(f"Proveedor..: {producto['proveedor']}")
-            print("-" * 40)
-        else:
-            print("Producto no encontrado.")
+    return jsonify({'mensaje': 'Usuario registrado correctamente'}), 201
 
 
-#--------------------------------------------------------------------
-# Cuerpo del programa
-#--------------------------------------------------------------------
-# Crear una instancia de la clase Catalogo
-#catalogo = Catalogo(host='localhost', user='root', password='root', database='miapp')
-catalogo = Catalogo(host='namePyFut.mysql.pythonanywhere-services.com', user='namePyFut', password='Pass3366', database='namePyFut$miapp')
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json(silent=True) or {}
+    usuario = (data.get('usuario') or '').strip()
+    password = (data.get('password') or '').strip()
+
+    if not usuario or not password:
+        return jsonify({'error': 'Usuario y contraseña son obligatorios'}), 400
+
+    db = get_db()
+    user = db.execute(
+        'SELECT * FROM usuarios WHERE usuario = ?', (usuario,)
+    ).fetchone()
+
+    if not user or not check_password_hash(user['password_hash'], password):
+        return jsonify({'error': 'Credenciales inválidas'}), 401
+
+    token = uuid.uuid4().hex
+    db.execute(
+        'INSERT INTO sesiones (token, usuario_id, creado) VALUES (?, ?, ?)',
+        (token, user['id'], date.today().isoformat())
+    )
+    db.commit()
+
+    return jsonify({
+        'mensaje': 'Inicio de sesión exitoso',
+        'token': token,
+        'usuario': {
+            'id': user['id'],
+            'usuario': user['usuario'],
+            'email': user['email']
+        }
+    }), 200
 
 
-# Carpeta para guardar las imagenes.
-#RUTA_DESTINO = './static/imagenes/'
-
-#Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
-RUTA_DESTINO = '/home/namePyFut/mysite/static/imagenes'
-
-
-#--------------------------------------------------------------------
-# Listar todos los productos
-#--------------------------------------------------------------------
-#La ruta Flask /productos con el método HTTP GET está diseñada para proporcionar los detalles de todos los productos almacenados en la base de datos.
-#El método devuelve una lista con todos los productos en formato JSON.
-@app.route("/productos", methods=["GET"])
-def listar_productos():
-    productos = catalogo.listar_productos()
-    return jsonify(productos)
+@app.route('/foro/temas', methods=['GET'])
+def listar_temas():
+    db = get_db()
+    filas = db.execute(
+        '''SELECT t.id, t.titulo, t.categoria, u.usuario AS autor, t.fecha,
+           (SELECT COUNT(*) FROM respuestas r WHERE r.tema_id = t.id) AS respuestas
+           FROM temas t JOIN usuarios u ON t.autor_id = u.id
+           ORDER BY t.id DESC'''
+    ).fetchall()
+    return jsonify([dict(f) for f in filas])
 
 
-#--------------------------------------------------------------------
-# Mostrar un sólo producto según su código
-#--------------------------------------------------------------------
-#La ruta Flask /productos/<int:codigo> con el método HTTP GET está diseñada para proporcionar los detalles de un producto específico basado en su código.
-#El método busca en la base de datos el producto con el código especificado y devuelve un JSON con los detalles del producto si lo encuentra, o None si no lo encuentra.
-@app.route("/productos/<int:codigo>", methods=["GET"])
-def mostrar_producto(codigo):
-    producto = catalogo.consultar_producto(codigo)
-    if producto:
-        return jsonify(producto), 201
-    else:
-        return "Producto no encontrado", 404
+@app.route('/foro/temas', methods=['POST'])
+def crear_tema():
+    user = usuario_actual(request)
+    if not user:
+        return jsonify({'error': 'No autenticado'}), 401
+
+    data = request.get_json(silent=True) or {}
+    titulo = (data.get('titulo') or '').strip()
+    categoria = (data.get('categoria') or '').strip()
+    contenido = (data.get('contenido') or '').strip()
+
+    if not titulo or not categoria or not contenido:
+        return jsonify({'error': 'Todos los campos son obligatorios'}), 400
+
+    if categoria not in CATEGORIAS_VALIDAS:
+        return jsonify({'error': 'Categoría inválida'}), 400
+
+    db = get_db()
+    cursor = db.execute(
+        'INSERT INTO temas (titulo, categoria, contenido, autor_id, fecha) VALUES (?, ?, ?, ?, ?)',
+        (titulo, categoria, contenido, user['id'], date.today().isoformat())
+    )
+    db.commit()
+
+    return jsonify({'mensaje': 'Tema creado correctamente', 'id': cursor.lastrowid}), 201
 
 
-#--------------------------------------------------------------------
-# Agregar un producto
-#--------------------------------------------------------------------
-@app.route("/productos", methods=["POST"])
-#La ruta Flask `/productos` con el método HTTP POST está diseñada para permitir la adición de un nuevo producto a la base de datos.
-#La función agregar_producto se asocia con esta URL y es llamada cuando se hace una solicitud POST a /productos.
-def agregar_producto():
-    #Recojo los datos del form
-    descripcion = request.form['descripcion']
-    cantidad = request.form['cantidad']
-    precio = request.form['precio']
-    imagen = request.files['imagen']
-    proveedor = request.form['proveedor']  
-    nombre_imagen=""
+@app.route('/foro/temas/<int:id>', methods=['GET'])
+def obtener_tema(id):
+    db = get_db()
+    tema = db.execute(
+        '''SELECT t.id, t.titulo, t.categoria, t.contenido, u.usuario AS autor, t.fecha
+           FROM temas t JOIN usuarios u ON t.autor_id = u.id
+           WHERE t.id = ?''',
+        (id,)
+    ).fetchone()
 
-    
-    # Genero el nombre de la imagen
-    nombre_imagen = secure_filename(imagen.filename) #Chequea el nombre del archivo de la imagen, asegurándose de que sea seguro para guardar en el sistema de archivos
-    nombre_base, extension = os.path.splitext(nombre_imagen) #Separa el nombre del archivo de su extensión.
-    nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}" #Genera un nuevo nombre para la imagen usando un timestamp, para evitar sobreescrituras y conflictos de nombres.
+    if not tema:
+        return jsonify({'error': 'Tema no encontrado'}), 404
 
-    nuevo_codigo = catalogo.agregar_producto(descripcion, cantidad, precio, nombre_imagen, proveedor)
-    if nuevo_codigo:    
-        imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
+    respuestas = db.execute(
+        '''SELECT r.id, u.usuario AS autor, r.fecha, r.contenido
+           FROM respuestas r JOIN usuarios u ON r.autor_id = u.id
+           WHERE r.tema_id = ?
+           ORDER BY r.id ASC''',
+        (id,)
+    ).fetchall()
 
-        #Si el producto se agrega con éxito, se devuelve una respuesta JSON con un mensaje de éxito y un código de estado HTTP 201 (Creado).
-        return jsonify({"mensaje": "Producto agregado correctamente.", "codigo": nuevo_codigo, "imagen": nombre_imagen}), 201
-    else:
-        #Si el producto no se puede agregar, se devuelve una respuesta JSON con un mensaje de error y un código de estado HTTP 500 (Internal Server Error).
-        return jsonify({"mensaje": "Error al agregar el producto."}), 500
-    
+    resultado = dict(tema)
+    resultado['respuestas'] = [dict(r) for r in respuestas]
 
-#--------------------------------------------------------------------
-# Modificar un producto según su código
-#--------------------------------------------------------------------
-@app.route("/productos/<int:codigo>", methods=["PUT"])
-#La ruta Flask /productos/<int:codigo> con el método HTTP PUT está diseñada para actualizar la información de un producto existente en la base de datos, identificado por su código.
-#La función modificar_producto se asocia con esta URL y es invocada cuando se realiza una solicitud PUT a /productos/ seguido de un número (el código del producto).
-def modificar_producto(codigo):
-    #Se recuperan los nuevos datos del formulario
-    nueva_descripcion = request.form.get("descripcion")
-    nueva_cantidad = request.form.get("cantidad")
-    nuevo_precio = request.form.get("precio")
-    nuevo_proveedor = request.form.get("proveedor")
-    
-    
-    # Verifica si se proporcionó una nueva imagen
-    if 'imagen' in request.files:
-        imagen = request.files['imagen']
-        # Procesamiento de la imagen
-        nombre_imagen = secure_filename(imagen.filename) #Chequea el nombre del archivo de la imagen, asegurándose de que sea seguro para guardar en el sistema de archivos
-        nombre_base, extension = os.path.splitext(nombre_imagen) #Separa el nombre del archivo de su extensión.
-        nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}" #Genera un nuevo nombre para la imagen usando un timestamp, para evitar sobreescrituras y conflictos de nombres.
-
-        # Guardar la imagen en el servidor
-        imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
-        
-        # Busco el producto guardado
-        producto = catalogo.consultar_producto(codigo)
-        if producto: # Si existe el producto...
-            imagen_vieja = producto["imagen_url"]
-            # Armo la ruta a la imagen
-            ruta_imagen = os.path.join(RUTA_DESTINO, imagen_vieja)
-
-            # Y si existe la borro.
-            if os.path.exists(ruta_imagen):
-                os.remove(ruta_imagen)
-    
-    else:
-        # Si no se proporciona una nueva imagen, simplemente usa la imagen existente del producto
-        producto = catalogo.consultar_producto(codigo)
-        if producto:
-            nombre_imagen = producto["imagen_url"]
+    return jsonify(resultado)
 
 
-    # Se llama al método modificar_producto pasando el codigo del producto y los nuevos datos.
-    if catalogo.modificar_producto(codigo, nueva_descripcion, nueva_cantidad, nuevo_precio, nombre_imagen, nuevo_proveedor):
-        
-        #Si la actualización es exitosa, se devuelve una respuesta JSON con un mensaje de éxito y un código de estado HTTP 200 (OK).
-        return jsonify({"mensaje": "Producto modificado"}), 200
-    else:
-        #Si el producto no se encuentra (por ejemplo, si no hay ningún producto con el código dado), se devuelve un mensaje de error con un código de estado HTTP 404 (No Encontrado).
-        return jsonify({"mensaje": "Producto no encontrado"}), 403
+@app.route('/foro/temas/<int:id>/respuestas', methods=['POST'])
+def crear_respuesta(id):
+    user = usuario_actual(request)
+    if not user:
+        return jsonify({'error': 'No autenticado'}), 401
+
+    db = get_db()
+    tema = db.execute('SELECT id FROM temas WHERE id = ?', (id,)).fetchone()
+    if not tema:
+        return jsonify({'error': 'Tema no encontrado'}), 404
+
+    data = request.get_json(silent=True) or {}
+    contenido = (data.get('contenido') or '').strip()
+
+    if not contenido:
+        return jsonify({'error': 'El contenido no puede estar vacío'}), 400
+
+    cursor = db.execute(
+        'INSERT INTO respuestas (tema_id, contenido, autor_id, fecha) VALUES (?, ?, ?, ?)',
+        (id, contenido, user['id'], date.today().isoformat())
+    )
+    db.commit()
+
+    return jsonify({'mensaje': 'Respuesta creada correctamente', 'id': cursor.lastrowid}), 201
 
 
-
-#--------------------------------------------------------------------
-# Eliminar un producto según su código
-#--------------------------------------------------------------------
-@app.route("/productos/<int:codigo>", methods=["DELETE"])
-#La ruta Flask /productos/<int:codigo> con el método HTTP DELETE está diseñada para eliminar un producto específico de la base de datos, utilizando su código como identificador.
-#La función eliminar_producto se asocia con esta URL y es llamada cuando se realiza una solicitud DELETE a /productos/ seguido de un número (el código del producto).
-def eliminar_producto(codigo):
-    # Busco el producto en la base de datos
-    producto = catalogo.consultar_producto(codigo)
-    if producto: # Si el producto existe, verifica si hay una imagen asociada en el servidor.
-        imagen_vieja = producto["imagen_url"]
-        # Armo la ruta a la imagen
-        ruta_imagen = os.path.join(RUTA_DESTINO, imagen_vieja)
-
-        # Y si existe, la elimina del sistema de archivos.
-        if os.path.exists(ruta_imagen):
-            os.remove(ruta_imagen)
-
-        # Luego, elimina el producto del catálogo
-        if catalogo.eliminar_producto(codigo):
-            #Si el producto se elimina correctamente, se devuelve una respuesta JSON con un mensaje de éxito y un código de estado HTTP 200 (OK).
-            return jsonify({"mensaje": "Producto eliminado"}), 200
-        else:
-            #Si ocurre un error durante la eliminación (por ejemplo, si el producto no se puede eliminar de la base de datos por alguna razón), se devuelve un mensaje de error con un código de estado HTTP 500 (Error Interno del Servidor).
-            return jsonify({"mensaje": "Error al eliminar el producto"}), 500
-    else:
-        #Si el producto no se encuentra (por ejemplo, si no existe un producto con el codigo proporcionado), se devuelve un mensaje de error con un código de estado HTTP 404 (No Encontrado). 
-        return jsonify({"mensaje": "Producto no encontrado"}), 404
-
-#--------------------------------------------------------------------
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)

@@ -6,8 +6,7 @@ Plataforma web para descubrir y recomendar animes, mangas y música relacionada.
 
 ### Frontend
 - **HTML5** + **CSS3** (Grid, Flexbox, custom properties)
-- **JavaScript vanilla** + **Vue.js 3** (2 páginas CRUD)
-- **Font Awesome** (iconos)
+- **JavaScript vanilla** (sin frameworks ni build step)
 
 ### Backend
 - **Python 3** + **Flask** (API REST)
@@ -24,14 +23,14 @@ cd manarem_anime
 python3 dev_server.py
 ```
 
-Abre `http://localhost:8000`. El server replica las URLs limpias de Vercel (`/recomend`, `/productos/altas`, etc.). Los datos salen de `frontend/static/js/mock-data.js`; para volver al backend real, poner `MOCK_MODE = false` en `frontend/static/js/api.js`.
+Abre `http://localhost:8000`. El server replica las URLs limpias de Vercel (`/recomend`, `/foro`, etc.). Los datos salen de `frontend/static/js/mock-data.js`; para volver al backend real, poner `MOCK_MODE = false` en `frontend/static/js/api.js`.
 
 ### Backend (opcional en esta etapa)
 
 ```bash
 python -m venv venv
 source venv/bin/activate
-pip install Flask flask-cors mysql-connector-python Werkzeug
+pip install -r requirements.txt
 python app.py
 ```
 
@@ -52,19 +51,16 @@ manarem_anime/
 │   ├── opiniones.html         # Opiniones
 │   ├── preg_frec.html         # FAQ
 │   ├── acerca_de.html         # Acerca de
-│   ├── productos.html         # CRUD menú
-│   ├── altas.html             # Alta producto
-│   ├── listado.html           # Listado producto
-│   ├── modificaciones.html    # Modificar producto
-│   ├── listadoEliminar.html   # Eliminar producto
-│   ├── modificaciones_VUE.html# Modificar (Vue)
-│   ├── listadoEliminar_VUE.html# Eliminar (Vue)
+│   ├── foro.html              # Foro: listado de temas
+│   ├── foro_tema.html         # Foro: tema con respuestas
 │   ├── vercel.json            # Rutas Vercel
-│   ├── static/css/            # 12 hojas de estilo
-│   ├── static/js/             # api.js, app.js
+│   ├── static/css/            # Hojas de estilo (design system + por página)
+│   ├── static/js/             # api.js, mock-data.js, components.js, app.js, hero.js
 │   ├── static/img/            # Imágenes
 │   └── assets/fonts/          # Alkatra + Fonstars
-├── app.py                     # Flask backend
+├── app.py                     # Backend Flask (foro + usuarios, SQLite)
+├── dev_server.py              # Server local con URLs limpias
+├── requirements.txt
 ├── README.md
 └── .gitignore
 ```

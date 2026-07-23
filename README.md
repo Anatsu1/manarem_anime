@@ -16,16 +16,26 @@ Plataforma web para descubrir y recomendar animes, mangas y música relacionada.
 
 ## Inicio rápido
 
+### Frontend (etapa actual — funciona sin backend, con datos mock)
+
 ```bash
 git clone <repo>
 cd manarem_anime
+python3 dev_server.py
+```
+
+Abre `http://localhost:8000`. El server replica las URLs limpias de Vercel (`/recomend`, `/productos/altas`, etc.). Los datos salen de `frontend/static/js/mock-data.js`; para volver al backend real, poner `MOCK_MODE = false` en `frontend/static/js/api.js`.
+
+### Backend (opcional en esta etapa)
+
+```bash
 python -m venv venv
 source venv/bin/activate
 pip install Flask flask-cors mysql-connector-python Werkzeug
 python app.py
 ```
 
-Servidor en `http://localhost:5000`. Frontend en `frontend/`.
+Servidor en `http://localhost:5000`.
 
 ## Estructura
 

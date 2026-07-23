@@ -1,100 +1,96 @@
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: calc(100vh - 50px);
-    padding: 20px;
-    background: url(../img/fondo.jpg);
-    background-position: center;
-    background-size: cover;
+.form-section {
+    padding-block: var(--space-2xl);
+    display: grid;
+    place-items: center;
 }
 
-.formContainer {
-    font-size: 1.1rem;
-    background-color: var(--form-bg);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px var(--shadow-color);
-    color: var(--letter-color);
-    width: 100%;
-    max-width: 500px;
-    padding: 30px;
-}
-
-.formContainer h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
-.formContainer label {
-    display: block;
-    margin: 12px 0 4px;
-}
-
-.formContainer input[type="text"],
-.formContainer input[type="password"],
-.formContainer input[type="file"],
-.formContainer input[type="email"] {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 6px;
+.form-card {
+    width: min(100%, 440px);
+    background: var(--surface-glass);
+    backdrop-filter: blur(8px);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
-    background: var(--input-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-elevated);
+}
+
+.form-card h1 {
+    font-size: 1.8rem;
+    margin-bottom: var(--space-sm);
+}
+
+.form-sub {
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+}
+
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--space-xs);
     color: var(--letter-color);
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.7em 1em;
+    background: var(--input-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    color: var(--text-body);
+    transition: border-color var(--transition-fast);
     box-sizing: border-box;
 }
 
-.formContainer input:focus {
-    border-color: var(--accent-color);
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--letter-hover);
+    outline: none;
 }
 
-.formContainer .btn-enviar {
+.form-card .btn {
     width: 100%;
-    padding: 14px;
-    margin-top: 16px;
-    font-size: 1.1rem;
-    border: 1px solid var(--accent-color);
-    background: transparent;
-    color: var(--letter-color);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    margin-top: var(--space-sm);
 }
 
-.formContainer .btn-enviar:hover {
-    background-color: var(--accent-color);
-    color: var(--letter-color);
+.form-alt {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: var(--space-md);
 }
 
-.inputError {
-    border-color: var(--error-color) !important;
+.form-alt a {
+    color: var(--letter-hover);
 }
 
-.inputExito {
-    border-color: var(--success-color) !important;
+.form-card--wide {
+    width: min(100%, 560px);
 }
 
-.formContainer input[type="checkbox"] {
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.form-check input {
     accent-color: var(--accent-color);
+    width: 1.1em;
+    height: 1.1em;
 }
 
-.formContainer li {
-    font-size: 0.8rem;
-    list-style: none;
+.form-check label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
-@media screen and (max-width: 520px) {
-    .container {
-        padding: 10px;
-    }
-
-    .formContainer {
-        padding: 20px;
-        font-size: 1rem;
-    }
+.form-check a {
+    color: var(--letter-hover);
 }

@@ -3,60 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ingresá a Manarem para descubrir animes, mangas y música.">
+    <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/base.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
-    <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/formulario.css">
     <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
-    <script src="/static/js/api.js"></script>
-    <script src="/static/js/app.js"></script>
-    <title>Manarem - ¡Ingresa y Encuentra tus Animes, Mangas y Música!</title>
+    <title>Ingresar — Manarem</title>
 </head>
 <body>
-    <header>
-        <nav class="head-grid-container">
-            <h2 id="icono">Manarem</h2>
-            <a class="hipervin"  id="h_home" href="/">Home</a>
-            <a class="hipervin"  id="h_recomendados" href="/recomend">Recomendados</a>
-            <a class="hipervin"  id="h_musica" href="/musica">Musica</a>
-            <a class="hipervin"  id="h_productos" href="/productos">Productos</a>
-            <div id="h_divotros" class="drop_otros">
-                <div class="hipervin" id="h_otros">Otros</div>
-                <div class="drop_otros_conten">
-                    <a class="hipervin" href="/acerca-de">Acerca de</a>
-                    <a class="hipervin" href="/contacto">Contacto</a>
-                    <a class="hipervin" href="/preguntas-frecuentes">Preguntas Frecuentes</a>
-                    <a class="hipervin" href="/opiniones">Opiniones</a>
+    <main>
+        <section class="form-section">
+            <div class="container">
+                <div class="form-card">
+                    <h1>Ingresar</h1>
+                    <p class="form-sub">Bienvenido de vuelta, otaku.</p>
+                    <form id="formLogin">
+                        <div class="form-group">
+                            <label for="usuario">Usuario</label>
+                            <input type="text" id="usuario" name="usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn">Iniciar sesión</button>
+                    </form>
+                    <p class="form-alt">¿No tenés cuenta? <a href="/registrarse">Registrate</a></p>
                 </div>
-            </div> 
-            <a class="hipervin"  id="h_ingresar" href="/ingresar">Ingresar</a>
-            <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
-        </nav>
-    </header>
-    <main><section class="container">
-        <div>
-            <form id="formLogin" class="formContainer">
-                <h3 class="boxHed">Iniciar Sesion</h3>
-                <label for="usuario">Usuario</label><input type="text" id="usuario" class="inputData" required>
-                <label for="password">Contraseña</label><input type="password" id="password" class="inputData" required>
-                <button type="submit" class="boxFunc btn-enviar">ENVIAR</button>
-            </form>
-        </div>
-    </section></main>
-    <footer class="footer">
-        <div class="footer-contenido">
-            <p class="footer-copy">&copy; 2024 Manarem. Todos los derechos reservados.</p>
-            <p class="footer-tech">Hecho con HTML5, CSS3, JavaScript y Python</p>
-            <div class="footer-autores">
-                <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/JohnCVF9" target="_blank" rel="noopener">John CV</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/Quiroz-Monica-R" target="_blank" rel="noopener">Monica Quiroz</a>
             </div>
-        </div>
-    </footer>
+        </section>
+    </main>
+    <script src="/static/js/mock-data.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/app.js"></script>
     <script>
         document.getElementById('formLogin').addEventListener('submit', async (e) => {
             e.preventDefault();

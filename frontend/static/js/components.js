@@ -1,7 +1,7 @@
 const HEADER_HTML = `
 <header class="site-header">
     <nav class="nav container" aria-label="Navegación principal">
-        <a class="nav-logo" href="/">Manarem</a>
+        <a class="nav-logo" href="/"><img class="nav-logo-img" src="/static/img/logo.svg" alt=""><span>Manarem</span></a>
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
             <span></span><span></span><span></span>
         </button>
@@ -31,7 +31,7 @@ const FOOTER_HTML = `
 <footer class="site-footer">
     <div class="container footer-grid">
         <div class="footer-brand">
-            <p class="footer-logo">Manarem</p>
+            <p class="footer-logo"><img class="footer-logo-img" src="/static/img/logo.svg" alt=""><span>Manarem</span></p>
             <p class="footer-tag">Descubrí animes, mangas y su música, todo en un solo lugar.</p>
         </div>
         <nav class="footer-nav" aria-label="Enlaces del sitio">
@@ -42,8 +42,8 @@ const FOOTER_HTML = `
         </nav>
         <div class="footer-authors">
             <p>Creado por</p>
-            <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
-            <a href="https://github.com/JohnCVF9" target="_blank" rel="noopener">John CV</a>
+            <a href="https://github.com/Anatsu1" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
+            <a href="https://github.com/Jodenly9" target="_blank" rel="noopener">John CV</a>
             <a href="https://github.com/Quiroz-Monica-R" target="_blank" rel="noopener">Monica Quiroz</a>
         </div>
     </div>

@@ -17,13 +17,24 @@
 }
 
 .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
     font-family: var(--font-display);
     font-size: 1.8rem;
+    transition: filter var(--transition-fast);
+}
+
+.nav-logo span {
     background: var(--gradient-accent);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    transition: filter var(--transition-fast);
+}
+
+.nav-logo-img {
+    width: 36px;
+    height: 36px;
 }
 
 .nav-logo:hover {

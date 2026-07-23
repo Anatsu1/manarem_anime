@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Logo de Manarem">
+  <defs>
+    <linearGradient id="manarem-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffbeff"/>
+      <stop offset="0.45" stop-color="#c76bc7"/>
+      <stop offset="1" stop-color="#60fdbc"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#15003d" stroke="rgba(255,190,255,0.25)" stroke-width="1.5"/>
+  <polyline points="14,50 14,24 23,13 32,31 41,13 50,24 50,50"
+            fill="none" stroke="url(#manarem-grad)" stroke-width="5.5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M51 6 L52.8 10.2 L57 12 L52.8 13.8 L51 18 L49.2 13.8 L45 12 L49.2 10.2 Z" fill="#60fdbc" opacity="0.95"/>
+  <circle cx="10" cy="55" r="1.6" fill="#ffbeff" opacity="0.8"/>
+</svg>

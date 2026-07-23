@@ -66,7 +66,8 @@ function mockRequest(method, path, data) {
             if (method === 'POST' && path === '/login') {
                 const usuario = data.usuario || data.email || 'Otaku';
                 const email = data.email || '';
-                resolve({ mensaje: 'Inicio de sesión exitoso', usuario: { usuario, email } });
+                const token = 'mock-token-' + Date.now();
+                resolve({ mensaje: 'Inicio de sesion exitoso', token, usuario: { id: 1, usuario, email } });
                 return;
             }
 
@@ -101,6 +102,70 @@ function mockRequest(method, path, data) {
                 return;
             }
 
+            if (method === 'GET' && path === '/foro/temas') {
+                const res = MOCK_DB.temas.map(t => ({
+                    id: t.id, titulo: t.titulo, categoria: t.categoria,
+                    autor: t.autor, fecha: t.fecha, respuestas: t.respuestas.length,
+                }));
+                resolve(res);
+                return;
+            }
+
+            if (method === 'GET' && parts[0] === 'foro' && parts[1] === 'temas' && parts[2]) {
+                const tema = MOCK_DB.temas.find(t => t.id === parseInt(parts[2]));
+                resolve(tema || { error: 'Tema no encontrado' });
+                return;
+            }
+
+            if (method === 'POST' && path === '/foro/temas') {
+                const userRaw = localStorage.getItem('user');
+                if (!userRaw) {
+                    resolve({ error: 'No autenticado' });
+                    return;
+                }
+                const user = JSON.parse(userRaw);
+                const maxId = MOCK_DB.temas.reduce((m, t) => Math.max(m, t.id), 0);
+                const hoy = new Date();
+                const fecha = hoy.getFullYear() + '-' + String(hoy.getMonth() + 1).padStart(2, '0') + '-' + String(hoy.getDate()).padStart(2, '0');
+                MOCK_DB.temas.push({
+                    id: maxId + 1,
+                    titulo: data.titulo,
+                    categoria: data.categoria,
+                    autor: user.usuario,
+                    fecha,
+                    contenido: data.contenido,
+                    respuestas: [],
+                });
+                resolve({ mensaje: 'Tema creado', id: maxId + 1 });
+                return;
+            }
+
+            if (method === 'POST' && parts[0] === 'foro' && parts[1] === 'temas' && parts[2] && parts[3] === 'respuestas') {
+                const tema = MOCK_DB.temas.find(t => t.id === parseInt(parts[2]));
+                if (!tema) {
+                    resolve({ error: 'Tema no encontrado' });
+                    return;
+                }
+                const userRaw = localStorage.getItem('user');
+                if (!userRaw) {
+                    resolve({ error: 'No autenticado' });
+                    return;
+                }
+                const user = JSON.parse(userRaw);
+                const hoy = new Date();
+                const fecha = hoy.getFullYear() + '-' + String(hoy.getMonth() + 1).padStart(2, '0') + '-' + String(hoy.getDate()).padStart(2, '0');
+                let maxRespId = 100;
+                MOCK_DB.temas.forEach(t => t.respuestas.forEach(r => { if (r.id > maxRespId) maxRespId = r.id; }));
+                tema.respuestas.push({
+                    id: maxRespId + 1,
+                    autor: user.usuario,
+                    fecha,
+                    contenido: data.contenido,
+                });
+                resolve({ mensaje: 'Respuesta publicada', id: maxRespId + 1 });
+                return;
+            }
+
             resolve({ error: 'Ruta no implementada en mock' });
         }, 300);
     });
@@ -112,10 +177,20 @@ async function apiRequest(method, path, data) {
     const url = `${API_BASE}${path}`;
     const options = { method };
 
+    const userRaw = localStorage.getItem('user');
+    if (userRaw) {
+        try {
+            const user = JSON.parse(userRaw);
+            if (user.token) {
+                options.headers = { ...(options.headers || {}), 'Authorization': 'Bearer ' + user.token };
+            }
+        } catch (_) {}
+    }
+
     if (data instanceof FormData) {
         options.body = data;
     } else if (data) {
-        options.headers = { 'Content-Type': 'application/json' };
+        options.headers = { ...(options.headers || {}), 'Content-Type': 'application/json' };
         options.body = JSON.stringify(data);
     }
 
@@ -141,5 +216,11 @@ const api = {
     opiniones: {
         listar: () => apiRequest('GET', '/opiniones'),
         crear: (data) => apiRequest('POST', '/opiniones', data),
+    },
+    foro: {
+        listarTemas: () => apiRequest('GET', '/foro/temas'),
+        obtenerTema: (id) => apiRequest('GET', '/foro/temas/' + id),
+        crearTema: (data) => apiRequest('POST', '/foro/temas', data),
+        responder: (id, data) => apiRequest('POST', '/foro/temas/' + id + '/respuestas', data),
     },
 };

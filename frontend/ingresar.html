@@ -51,7 +51,7 @@
                 if (result.error) {
                     showAlert('Credenciales incorrectas.', 'error');
                 } else {
-                    localStorage.setItem('user', JSON.stringify(result.usuario || result));
+                    localStorage.setItem('user', JSON.stringify({ ...(result.usuario || {}), token: result.token }));
                     showAlert('¡Inicio de sesión exitoso!', 'success');
                     setTimeout(() => window.location.href = '/', 1500);
                 }

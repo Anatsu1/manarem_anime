@@ -114,10 +114,28 @@ Paleta oscura con acentos púrpura y rosa neón.
 **Breakpoints:** 520px (mobile), 900px (tablet), 1200px (desktop).
 **Patrones:** CSS Grid, sticky header, cards con hover lift, glassmorphism, hero animado con keyframes.
 
+## Estado del proyecto y roadmap
+
+### Hecho (julio 2026)
+
+- ✅ **Rediseño visual v2** completo: design system con tokens CSS, header/footer inyectados por `components.js`, glassmorphism, cards con glow, responsive 520/900/1200.
+- ✅ **Frontend standalone**: capa de mocks (`MOCK_MODE` en `api.js`) — todo funciona sin backend, listo para Vercel.
+- ✅ **Home dinámico**: hero carrousel (mín. 75vh) y destacados alimentados por la **API de AniList** (fallback Jikan → imágenes locales), más los 3 temas con más respuestas del foro.
+- ✅ **Foro con usuarios** (reemplazó al CRUD de productos): backend Flask + SQLite con registro, login (hash + token de sesión), temas por categoría y respuestas. Mocks con contrato idéntico.
+- ✅ Logo SVG propio, fuentes display sin acentos (limitación de Fonstars), `dev_server.py` con URLs limpias.
+
+### Próximos pasos
+
+- [ ] **Deploy**: frontend a Vercel (modo mock) y backend a PythonAnywhere; apuntar `API_BASE` a la URL de producción y `MOCK_MODE = false`.
+- [ ] **Backend de contacto y opiniones**: hoy solo existen como mock; falta persistirlos.
+- [ ] **Foro fase 2**: editar/borrar temas y respuestas propios, paginación, expiración de sesiones, logout.
+- [ ] **Perfiles de usuario**: avatar (el campo ya existe en registro), página de perfil.
+- [ ] **A evaluar**: migración a PostgreSQL, búsqueda de animes vía AniList en `/recomend`, moderación del foro, rate limiting en la API, tests automatizados del backend.
+
 ## Autores
 
-- [Cesar Augusto Fernandez Carbonell](https://github.com/an4tsu)
-- [John CV](https://github.com/JohnCVF9)
+- [Cesar Augusto Fernandez Carbonell](https://github.com/Anatsu1)
+- [John CV](https://github.com/Jodenly9)
 - [Monica Quiroz](https://github.com/Quiroz-Monica-R)
 
 ## Licencia

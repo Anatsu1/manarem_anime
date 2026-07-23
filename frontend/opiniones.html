@@ -3,372 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Opiniones de la comunidad sobre Manarem: leé reseñas y dejá tu opinión sobre animes, mangas y productos.">
+    <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/base.css">
-    <link rel="stylesheet" href="/static/css/opiniones.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
-    <link rel="stylesheet" href="/static/css/colors.css">
+    <link rel="stylesheet" href="/static/css/opiniones.css">
     <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
-    <script src="/static/js/api.js"></script>
-    <script src="/static/js/app.js"></script>
-    <title>Manarem - ¡Deja tus opiniones!</title>
+    <title>Opiniones — Manarem</title>
 </head>
 <body>
-    <header>
-        <nav class="head-grid-container">
-            <h2 id="icono">Manarem</h2>
-            <a class="hipervin"  id="h_home" href="/">Home</a>
-            <a class="hipervin"  id="h_recomendados" href="/recomend">Recomendados</a>
-            <a class="hipervin"  id="h_musica" href="/musica">Musica</a>
-            <a class="hipervin"  id="h_productos" href="/productos">Productos</a>
-            <div id="h_divotros" class="drop_otros">
-                <div class="hipervin" id="h_otros">Otros</div>
-                <div class="drop_otros_conten">
-                    <a class="hipervin" href="/acerca-de">Acerca de</a>
-                    <a class="hipervin" href="/contacto">Contacto</a>
-                    <a class="hipervin" href="/preguntas-frecuentes">Preguntas Frecuentes</a>
-                    <a class="hipervin" href="/opiniones">Opiniones</a>
-                </div>
-            </div> 
-            <a class="hipervin"  id="h_ingresar" href="/ingresar">Ingresar</a>
-            <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
-        </nav>
-    </header>
     <main>
-    <div id="titulo">
-        <h1>Opiniones de usuarios</h1>
-    </div>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Opiniones de la comunidad</h2>
+                <p class="text-muted">Leé lo que otros usuarios opinan sobre Manarem y compartí tu experiencia.</p>
+                <div id="opiniones-list" class="opiniones-list"></div>
 
-    <section class="main">
-        <div class="full-boxer">
-            <div class="comment-box">
-                <div class="box-top">
-                    <div class="Profile">
-                        <div class="profile-image">
-                            <img src="/static/img/persona1-f.jpg" alt="Foto de perfil de Ranidi Luciana">
-                        </div>
-                        <div class="Name">
-                            <strong>Ranidi Luciana</strong>
-                            <span>@Ranidi Luciana</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    </p>
-                </div>
-            </div>
-
-            <div class="comment-box">
-                <div class="box-top">
-                    <div class="Profile">
-                        <div class="profile-image">
-                            <img src="/static/img/persona2-f.jpg" alt="Foto de perfil de Borges Melina">
-                        </div>
-                        <div class="Name">
-                            <strong>Borges Melina</strong>
-                            <span>@borges melinna</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    </p>
-                </div>
-            </div>
-
-            <div class="comment-box">
-                <div class="box-top">
-                    <div class="Profile">
-                        <div class="profile-image">
-                            <img src="/static/img/persona3-m.jpg" alt="Foto de perfil de Smith Paul">
-                        </div>
-                        <div class="Name">
-                            <strong>Smith Paul</strong>
-                            <span>@smith paul</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    </p>
-                </div>
-            </div>
-
-            <div class="comment-box">
-                <div class="box-top">
-                    <div class="Profile">
-                        <div class="profile-image">
-                            <img src="/static/img/persona4-f.jpg" alt="Foto de perfil de Sardi Fiorella">
-                        </div>
-                        <div class="Name">
-                            <strong>Sardi Fiorella</strong>
-                            <span>@sardi fiore</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-<br>
-        <div class="comments-container">
-            <ul id="comments-list" class="comments-list">
-                <div class="comentar-publicacion">
-                    <div class="avatar">
-                        <img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt="Avatar de comentario">
-                    </div>
-                   <form action="#" method="post" class="comentar-comentario">
-                       <input type="text" name="" value="" placeholder="">
-                       <button type="" class="boton-enviar">
-                           <i class="fas fa-paper-plane"></i>
-                       </button>
-                   </form>
-                </div>
-                <br>
-
-
-
-                <li>
-                    <div class="comment-main-level">
-                        <!-- Avatar -->
-                        <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt="Avatar de comentario"></div>
-                        <!-- Contenedor del Comentario -->
-                        <div class="comment-box">
-                            <div class="comment-head">
-                                <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-                                <span>hace 20 minutos</span>
-                                <i class="fa fa-reply"></i>
-                                <i class="fa fa-heart"></i>
-                            </div>
-                            <div class="comment-content">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Respuestas de los comentarios -->
-                    <ul class="comments-list reply-list">
-                        <li>
-                            <!-- Avatar -->
-                            <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt="Avatar de comentario"></div>
-                            <!-- Contenedor del Comentario -->
-                            <div class="comment-box">
-                                <div class="comment-head">
-                                    <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-                                    <span>hace 10 minutos</span>
-                                    <i class="fa fa-reply"></i>
-                                    <i class="fa fa-heart"></i>
-                                </div>
-                                <div class="comment-content">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                                </div>
-                            </div>
-                        </li>
-        
-                        <li>
-                            <!-- Avatar -->
-                            <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt="Avatar de comentario"></div>
-                            <!-- Contenedor del Comentario -->
-                            <div class="comment-box">
-                                <div class="comment-head">
-                                    <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-                                    <span>hace 10 minutos</span>
-                                    <i class="fa fa-reply"></i>
-                                    <i class="fa fa-heart"></i>
-                                </div>
-                                <div class="comment-content">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-        
-                <li>
-                    <div class="comment-main-level">
-                        <!-- Avatar -->
-                        <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt="Avatar de comentario"></div>
-                        <!-- Contenedor del Comentario -->
-                        <div class="comment-box">
-                            <div class="comment-head">
-                                <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-                                <span>hace 10 minutos</span>
-                                <i class="fa fa-reply"></i>
-                                <i class="fa fa-heart"></i>
-                            </div>
-                            <div class="comment-content">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-
-
-                
-
-
-
-
-
-
-
-
-
-                
-            </ul>
-
-
-            <br>
-            <section class="contenedor-comentarios">
-                <div class="area-comentar">
-                    <div class="avatar">
-                        <img src="http://localhost/multimedia/relleno/img-c9.png" alt="Imagen de comentario">
-                    </div>
-                    <form id="formOpinion" method="post" class="inputs-comentarios">
-                        <textarea name="mensaje" id="mensaje" class="area-comentario" placeholder="Escribí tu opinión..." required></textarea>
-                        <div class="botones-comentar">
-                            <div class="boton-subir-archivo">
-                                <label class="boton-file" for="adjuntar">
-                                    <i class="far fa-image"></i>
-                                    Adjuntar archivo
-                                </label>
-                                <input type="file" name="" value="" placeholder="" id="adjuntar">
-                            </div>
-                            <button class="boton-enviar" type="submit">
-                                <i class="fas fa-paper-plane"></i>
-                                Enviar
-                            </button>
-                        </div>
+                <div class="opinion-form-card">
+                    <h3>Dejá tu opinión</h3>
+                    <form id="formOpinion">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                        <label for="texto">Tu opinión</label>
+                        <textarea id="texto" name="texto" rows="4" required></textarea>
+                        <button type="submit" class="btn">Enviar opinión</button>
                     </form>
                 </div>
-                <div class="publicacion-realizada">
-                    <div class="usuario-publico">
-                        <div class="avatar">
-                            <img src="http://localhost/multimedia/relleno/img-c9.png" alt="Imagen de comentario">
-                        </div>
-                        <div class="contenido-publicacion">
-                            <h4>Carolina de la valle</h4>
-                            <ul>
-                                <li>Hace 3 min</li>
-                            </ul>
-                        </div>
-                        <div class="menu-comentario">
-                            <i class="fas fa-pen"></i>
-                            <ul class="menu">
-                                <li><a href="">Editar</a></li>
-                                <li><a href="">Eliminar</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores aliquam possimus, doloremque repellat assumenda ipsam magni ducimus, dolorem explicabo</p>
-                    <div class="archivo-publicado">
-                        <img src="http://localhost/multimedia/relleno/img-s5.png" alt="Imagen de comentario">
-                    </div>
-                    <div class="botones-comentario">
-                        <button type="" class="boton-puntuar">
-                            <i class="fas fa-thumbs-up"></i>
-                            45
-                        </button>
-                        <button type="" class="boton-responder">
-                            Comentar
-                        </button>
-                    </div>
-                </div>
-                <div class="comentarios-usuarios">
-                    <!-- comentario principal -->
-                    <div class="comentario-principal-usuario">
-                        <div class="avatar">
-                            <img src="http://localhost/multimedia/relleno/img-c10.png" alt="Imagen de comentario">
-                        </div>
-                        <div class="comentario">
-                            <div class="usuario-comentario">
-                                <div class="texto">
-                                    <a href="#" title="" class="nombre-usuario">Camila valle</a> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla tenetur necessitatibus.
-                                    <div class="menu-comentario">
-                                        <i class="fas fa-pen"></i>
-                                        <ul class="menu">
-                                            <li><a href="">Editar</a></li>
-                                            <li><a href="">Eliminar</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="botones-comentario">
-                                    <button type="" class="boton-puntuar">
-                                        <i class="fas fa-thumbs-up"></i>5</button>
-                                    <button type="" class="boton-responder">responder</button>
-                                    <span class="tiempo-comentario">
-                                        hace 3 min
-                                    </span>
-                                </div>
-                            </div>
-            
-                        </div>
-            
-                    </div>
-            
-                    <div class="comentar-publicacion">
-                        <div class="avatar">
-                            <img src="http://localhost/multimedia/relleno/img-c10.png" alt="Imagen de comentario">
-                        </div>
-                       <form action="#" method="post" class="comentar-comentario">
-                           <input type="text" name="" value="" placeholder="">
-                           <button type="" class="boton-enviar">
-                               <i class="fas fa-paper-plane"></i>
-                           </button>
-                       </form>
-                    </div>
-                    
-                </div>
-            </section>
-        </div>
-
-
-    </section>
-    </main>
-   
-    <footer class="footer">
-        <div class="footer-contenido">
-            <p class="footer-copy">&copy; 2024 Manarem. Todos los derechos reservados.</p>
-            <p class="footer-tech">Hecho con HTML5, CSS3, JavaScript y Python</p>
-            <div class="footer-autores">
-                <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/JohnCVF9" target="_blank" rel="noopener">John CV</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/Quiroz-Monica-R" target="_blank" rel="noopener">Monica Quiroz</a>
             </div>
-        </div>
-    </footer>
+        </section>
+    </main>
+    <script src="/static/js/mock-data.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/app.js"></script>
     <script>
+        async function cargarOpiniones() {
+            const lista = document.getElementById('opiniones-list');
+            const opiniones = await api.opiniones.listar();
+            lista.innerHTML = opiniones.map(op => `
+                <article class="opinion-card">
+                    <img class="opinion-avatar" src="/static/img/${op.avatar}" alt="Avatar de ${op.nombre}">
+                    <div class="opinion-body">
+                        <header class="opinion-head">
+                            <h3>${op.nombre}</h3>
+                            <time datetime="${op.fecha}">${op.fecha}</time>
+                        </header>
+                        <p>${op.texto}</p>
+                    </div>
+                </article>`).join('');
+        }
+
         document.getElementById('formOpinion').addEventListener('submit', async (e) => {
             e.preventDefault();
             const data = {
-                mensaje: document.getElementById('mensaje').value
+                nombre: document.getElementById('nombre').value,
+                texto: document.getElementById('texto').value,
             };
-            try {
-                const result = await api.opiniones.crear(data);
-                if (result.error) {
-                    showAlert('Error al enviar opinión: ' + result.error, 'error');
-                } else {
-                    showAlert('¡Opinión enviada correctamente!', 'success');
-                    document.getElementById('formOpinion').reset();
-                }
-            } catch (error) {
-                showAlert('No se pudo conectar con el servidor.', 'error');
+            const result = await api.opiniones.crear(data);
+            if (result.error) {
+                showAlert('Error al enviar opinión: ' + result.error, 'error');
+            } else {
+                showAlert('¡Opinión enviada correctamente!', 'success');
+                e.target.reset();
+                cargarOpiniones();
             }
         });
+
+        cargarOpiniones();
     </script>
 </body>
 </html>

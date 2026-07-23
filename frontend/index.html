@@ -3,127 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manarem: descubrí animes, mangas y su música. Recomendaciones curadas con enlaces para ver y leer online.">
+    <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/base.css">
-    <link rel="stylesheet" href="/static/css/cards.css">
-    <link rel="stylesheet" href="/static/css/index.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
-    <link rel="stylesheet" href="/static/css/colors.css">
+    <link rel="stylesheet" href="/static/css/cards.css">
+    <link rel="stylesheet" href="/static/css/index.css">
     <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
-    <title>Manarem - ¡Encuentra tus Animes, Mangas y Música!</title>
+    <title>Manarem — Descubrí animes, mangas y su música</title>
 </head>
 <body>
-    <header>
-        <nav class="head-grid-container">
-            <h2 id="icono">Manarem</h2>
-            <a class="hipervin"  id="h_home" href="/">Home</a>
-            <a class="hipervin"  id="h_recomendados" href="/recomend">Recomendados</a>
-            <a class="hipervin"  id="h_musica" href="/musica">Musica</a>
-            <a class="hipervin"  id="h_productos" href="/productos">Productos</a>
-            <div id="h_divotros" class="drop_otros">
-                <div class="hipervin" id="h_otros">Otros</div>
-                <div class="drop_otros_conten">
-                    <a class="hipervin" href="/acerca-de">Acerca de</a>
-                    <a class="hipervin" href="/contacto">Contacto</a>
-                    <a class="hipervin" href="/preguntas-frecuentes">Preguntas Frecuentes</a>
-                    <a class="hipervin" href="/opiniones">Opiniones</a>
-                </div>
-            </div> 
-            <a class="hipervin"  id="h_ingresar" href="/ingresar">Ingresar</a>
-            <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
-        </nav>
-    </header>
-
     <main>
-    <div class="grid-container">
-        <div class="main">
-            <div class="contenedor">
-                <h1 id="titulo1">Recomendaciones de Anime y Música</h1>
-                <h3 id="subtitulo">Últimos Actualizados</h3>
-                <div id="reel"></div>
-            </div>
-
-            <h1 id="titulo2">Animes y Mangas Recomendados</h1>
-            <div id="cartelera">
-                <div class="card">
-                    <img class="imgresponsive" src="/static/img/Chainsaw.jpg" alt="Portada de Chainsaw Man">
-                    <h3>Titulo Anime/Manga de Ejemplo</h3>
-                    <h4>Descripción: breve del Anime/Manga</h4>
-                    <h5>Anime:</h5>
-                    <a href="https://www.crunchyroll.com/es-es/series/GVDHX8QNW/chainsaw-man" class="Links_Sitios">Crunchiroll</a>
-                    <a href="https://www.animefenix.tv/chainsaw-man" class="Links_Sitios">animefenix</a>
-                    <h5>Manga:</h5>
-                    <a href="" class="Links_Sitios">Link Vacio a Anime/Manga</a>
+        <section class="hero">
+            <div class="container hero-inner">
+                <div>
+                    <p class="hero-kicker">Animes · Mangas · Música</p>
+                    <h1 class="hero-title">Descubrí tu próximo <span>anime favorito</span></h1>
+                    <p class="hero-text">Manarem reúne recomendaciones de animes y mangas con enlaces directos para verlos y leerlos, más la música que los hace inolvidables.</p>
+                    <div class="hero-actions">
+                        <a class="btn" href="/recomend">Ver recomendados</a>
+                        <a class="btn btn-ghost" href="/musica">Escuchar música</a>
+                    </div>
                 </div>
-                <div class="card">
-                    <img class="imgresponsive" src="/static/img/OneP.jpg" alt="Portada de One Piece">
-                    <h3>Titulo Anime/Manga de Ejemplo</h3>
-                    <h4>Descripción: breve del Anime/Manga</h4>
-                    <h5>Anime:</h5>
-                    <a href="" class="Links_Sitios">Link Vacio a Anime/Manga</a>
-                    <h5>Manga:</h5>
-                    <a href="" class="Links_Sitios">Link Vacio a Anime/Manga</a>
-                </div>
-                <div class="card">
-                    <img class="imgresponsive" src="/static/img/DemonS.jpg" alt="Portada de Demon Slayer">
-                    <h3>Titulo Anime/Manga de Ejemplo</h3>
-                    <h4>Descripción: breve del Anime/Manga</h4>
-                    <h5>Anime:</h5>
-                    <a href="" class="Links_Sitios">Link Vacio a Anime/Manga</a>
-                    <h5>Manga:</h5>
-                    <a href="" class="Links_Sitios">Link Vacio a Anime/Manga</a>
-                </div>
-                <div class="card">
-                    <img class="imgresponsive" src="/static/img/JujutK.jpg" alt="Portada de Jujutsu Kaisen">
-                    <h3>Titulo Anime/Manga de Ejemplo</h3>
-                    <h4>Descripción: breve del Anime/Manga</h4>
-                    <h5>Anime:</h5>
-                    <a href="" class="Links_Sitios">Link Vacio a Anime/Manga</a>
-                    <h5>Manga:</h5>
-                    <a href="" class="Links_Sitios">Link Vacio a Anime/Manga</a>
+                <div class="hero-covers">
+                    <img src="/static/img/Chainsaw.jpg" alt="Portada de Chainsaw Man">
+                    <img src="/static/img/JujutK.jpg" alt="Portada de Jujutsu Kaisen">
+                    <img src="/static/img/DemonS.jpg" alt="Portada de Demon Slayer">
                 </div>
             </div>
-        </div>
-    
-        <div class="buscador">
-            <form action="#" autocomplete="off">
-                <input type="text" name="buscar" placeholder="Buscar" class="campo-buscar">
-            </form>
-        </div>
-    </div>
-    <hr>
-    <section id="info">
-        <div class="b-info">
-            <h3 class="p-i">¡Sean Bievenidos a Manarem!</h3>
-            <p class="p-i">Color parecido al Footer, Texto sobre algo Anime o de la página .Descripción</p>
-            <p class="p-i">Nuestra meta es que puedas encontrar todos los Mangas y Animes disponibles en internet para que te sean más fáciles de encontrar. También te recomendamos música relacionada</p>
-        </div>
+        </section>
 
-        <div class="b-info">
-            <h3 class="p-i">¿Qué es un manga?</h3>
-            <p class="p-i">Color parecido al Footer, Texto sobre algo Anime o de la página</p>
-            <p class="p-i">Explicacón</p>
-        </div>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Destacados de la temporada</h2>
+                <div class="card-grid">
+                    <article class="card">
+                        <div class="card-media">
+                            <img src="/static/img/Chainsaw.jpg" alt="Portada de Chainsaw Man">
+                            <span class="card-badge">Anime + Manga</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Chainsaw Man</h3>
+                            <p class="card-text">Denji, un joven endeudado, se fusiona con su demonio motosierra y se une a los Cazadores de Demonios. Acción brutal y humor negro.</p>
+                            <div class="card-tags">
+                                <span class="card-tag">Acción</span>
+                                <span class="card-tag">Sobrenatural</span>
+                            </div>
+                            <div class="card-links">
+                                <a href="https://www.crunchyroll.com/es-es/series/GVDHX8QNW/chainsaw-man" target="_blank" rel="noopener">Ver en Crunchyroll</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-media">
+                            <img src="/static/img/OneP.jpg" alt="Portada de One Piece">
+                            <span class="card-badge">Anime + Manga</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">One Piece</h3>
+                            <p class="card-text">Luffy y su tripulación surcan Grand Line en busca del One Piece. La aventura más longeva y querida del shōnen.</p>
+                            <div class="card-tags">
+                                <span class="card-tag">Aventura</span>
+                                <span class="card-tag">Shōnen</span>
+                            </div>
+                            <div class="card-links">
+                                <a href="https://www.crunchyroll.com/es-es/series/GRMG8ZQZR/one-piece" target="_blank" rel="noopener">Ver en Crunchyroll</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-media">
+                            <img src="/static/img/DemonS.jpg" alt="Portada de Demon Slayer">
+                            <span class="card-badge">Anime + Manga</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Demon Slayer</h3>
+                            <p class="card-text">Tanjiro se convierte en cazador de demonios para salvar a su hermana. Animación deslumbrante de ufotable.</p>
+                            <div class="card-tags">
+                                <span class="card-tag">Acción</span>
+                                <span class="card-tag">Histórico</span>
+                            </div>
+                            <div class="card-links">
+                                <a href="https://www.crunchyroll.com/es-es/series/GY5P48XEY/demon-slayer-kimetsu-no-yaiba" target="_blank" rel="noopener">Ver en Crunchyroll</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-media">
+                            <img src="/static/img/JujutK.jpg" alt="Portada de Jujutsu Kaisen">
+                            <span class="card-badge">Anime + Manga</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Jujutsu Kaisen</h3>
+                            <p class="card-text">Yuji Itadori traga un dedo maldito y entra al mundo de los hechiceros. Peleas coreografiadas al milímetro.</p>
+                            <div class="card-tags">
+                                <span class="card-tag">Acción</span>
+                                <span class="card-tag">Sobrenatural</span>
+                            </div>
+                            <div class="card-links">
+                                <a href="https://www.crunchyroll.com/es-es/series/GRDV0019R/jujutsu-kaisen" target="_blank" rel="noopener">Ver en Crunchyroll</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-        <div class="b-info">
-            <h3 class="p-i">¿Diferencia entre manga, mahua y manwhua?</h3>
-            <p class="p-i">Color parecido al Footer, Texto sobre algo Anime o de la página</p>
-            <p class="p-i">Explicación</p>
-        </div>
-    </section>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">¿Nuevo en el mundo otaku?</h2>
+                <div class="info-grid">
+                    <article class="info-box">
+                        <h3>¡Bienvenido a Manarem!</h3>
+                        <p>Nuestra meta es que encuentres todos los mangas y animes disponibles en internet, en un solo lugar y con enlaces directos. También te recomendamos la música que los acompaña.</p>
+                    </article>
+                    <article class="info-box">
+                        <h3>¿Qué es un manga?</h3>
+                        <p>El manga es la historieta japonesa: se lee de derecha a izquierda y abarca todos los géneros imaginables. Muchos animes nacen como adaptaciones de mangas exitosos.</p>
+                    </article>
+                    <article class="info-box">
+                        <h3>¿Manga, manhwa o manhua?</h3>
+                        <p>El manga es de Japón, el manhwa de Corea (se lee de izquierda a derecha, suele ser webtoon a color) y el manhua de China. Cada uno tiene estilo y tradición propios.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
     </main>
-    <footer class="footer">
-        <div class="footer-contenido">
-            <p class="footer-copy">&copy; 2024 Manarem. Todos los derechos reservados.</p>
-            <p class="footer-tech">Hecho con HTML5, CSS3, JavaScript y Python</p>
-            <div class="footer-autores">
-                <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/JohnCVF9" target="_blank" rel="noopener">John CV</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/Quiroz-Monica-R" target="_blank" rel="noopener">Monica Quiroz</a>
-            </div>
-        </div>
-    </footer>
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/app.js"></script>
 </body>
 </html>

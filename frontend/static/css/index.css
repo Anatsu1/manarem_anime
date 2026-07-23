@@ -1,86 +1,121 @@
-@keyframes cambiar {
-    0% { background-image: url("../img/reel1.jpg"); }
-    25% { background-image: url("../img/reel2.jpg"); }
-    50% { background-image: url("../img/reel3.jpg"); }
-    75% { background-image: url("../img/reel4.jpg"); }
-    100% { background-image: url("../img/reel5.jpg"); }
-}
-
-#reel {
+.hero {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 16px;
+    padding-block: var(--space-2xl);
     overflow: hidden;
-    border: 1px solid var(--border-light);
-    background-image: url(../img/reel5.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 65vh;
-    min-height: 250px;
-    animation-name: cambiar;
-    animation-duration: 25s;
-    animation-delay: 3s;
-    animation-iteration-count: infinite;
 }
 
-#reel::after {
-    content: '';
+.hero::before {
+    content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, var(--main-bg) 0%, transparent 50%);
+    background:
+        radial-gradient(ellipse 45% 60% at 75% 30%, rgba(158, 76, 158, 0.28), transparent),
+        radial-gradient(ellipse 35% 45% at 20% 70%, rgba(96, 253, 188, 0.1), transparent);
     pointer-events: none;
 }
 
-.contenedor {
-    margin-bottom: 20px;
+.hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: var(--space-xl);
 }
 
-hr {
-    border: none;
-    border-top: 1px solid var(--border-light);
-    margin: 0;
+.hero-kicker {
+    font-size: 0.95rem;
+    color: var(--letter-hover);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-md);
 }
 
-#info {
-    padding: 30px 5vw;
+.hero-title {
+    margin-bottom: var(--space-md);
+}
+
+.hero-title span {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-text {
+    color: var(--text-muted);
+    max-width: 48ch;
+    margin-bottom: var(--space-lg);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.hero-covers {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    justify-content: center;
-    color: var(--letter-color);
-    background-color: var(--main-bg);
+    gap: var(--space-md);
 }
 
-.b-info {
-    text-align: center;
-    border-radius: 16px;
+.hero-covers img {
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
     border: 1px solid var(--border-light);
-    padding: 20px;
-    box-shadow: 0 4px 12px var(--shadow-color);
-    background: var(--input-bg);
+    box-shadow: var(--shadow-elevated);
+}
+
+.hero-covers img:nth-child(1) {
+    transform: rotate(-4deg) translateY(12px);
+}
+
+.hero-covers img:nth-child(3) {
+    transform: rotate(4deg) translateY(12px);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+}
+
+.info-box {
+    padding: var(--space-lg);
+    background: var(--surface-glass);
     backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition-base), border-color var(--transition-base);
 }
 
-.b-info h3 {
-    padding-bottom: 8px;
-    color: var(--letter-color);
+.info-box:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-color);
 }
 
-.p-i {
-    padding: 4px;
-    font-size: 0.9rem;
-    opacity: 0.9;
+.info-box h3 {
+    margin-bottom: var(--space-sm);
 }
 
-@media screen and (max-width: 900px) {
-    #info {
+.info-box p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+    .hero-inner {
         grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 20px;
+    }
+
+    .hero-covers {
+        max-width: 480px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
     }
 }

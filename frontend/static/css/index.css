@@ -2,9 +2,13 @@
     position: relative;
     padding-block: var(--space-2xl);
     overflow: hidden;
-    min-height: 420px;
+    min-height: max(75vh, 520px);
     display: grid;
     align-items: center;
+}
+
+.hero-title {
+    font-size: clamp(2.4rem, 6vw, 4rem);
 }
 
 .hero-slides {
@@ -80,6 +84,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-md);
+}
+
+.home-foro-actions {
+    margin-top: var(--space-lg);
 }
 
 .info-grid {

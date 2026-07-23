@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
     <link rel="stylesheet" href="/static/css/cards.css">
+    <link rel="stylesheet" href="/static/css/foro.css">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
     <title>Manarem — Descubrí animes, mangas y su música</title>
@@ -38,7 +39,7 @@
         <section class="section">
             <div class="container">
                 <h2 class="section-title">Destacados de la temporada</h2>
-                <div class="card-grid">
+                <div id="destacados-grid" class="card-grid">
                     <article class="card">
                         <div class="card-media">
                             <img src="/static/img/Chainsaw.jpg" alt="Portada de Chainsaw Man">
@@ -113,6 +114,16 @@
 
         <section class="section">
             <div class="container">
+                <h2 class="section-title">Lo mas hablado del foro</h2>
+                <div id="foro-home" class="temas-list"></div>
+                <div class="home-foro-actions">
+                    <a class="btn btn-ghost" href="/foro">Ir al foro</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
                 <h2 class="section-title">¿Nuevo en el mundo otaku?</h2>
                 <div class="info-grid">
                     <article class="info-box">
@@ -131,8 +142,10 @@
             </div>
         </section>
     </main>
+    <script src="/static/js/mock-data.js"></script>
+    <script src="/static/js/api.js"></script>
     <script src="/static/js/components.js"></script>
     <script src="/static/js/app.js"></script>
-    <script src="/static/js/hero.js"></script>
+    <script src="/static/js/home.js"></script>
 </body>
 </html>

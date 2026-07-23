@@ -17,21 +17,21 @@ async function apiRequest(method, path, data) {
 
 const api = {
     productos: {
-        listar: () => apiRequest('GET', '/api/productos'),
-        obtener: (codigo) => apiRequest('GET', `/api/productos/${codigo}`),
-        crear: (formData) => apiRequest('POST', '/api/productos', formData),
-        modificar: (codigo, formData) => apiRequest('PUT', `/api/productos/${codigo}`, formData),
-        eliminar: (codigo) => apiRequest('DELETE', `/api/productos/${codigo}`),
+        listar: () => apiRequest('GET', '/productos'),
+        obtener: (codigo) => apiRequest('GET', `/productos/${codigo}`),
+        crear: (formData) => apiRequest('POST', '/productos', formData),
+        modificar: (codigo, formData) => apiRequest('PUT', `/productos/${codigo}`, formData),
+        eliminar: (codigo) => apiRequest('DELETE', `/productos/${codigo}`),
     },
     auth: {
-        registro: (data) => apiRequest('POST', '/api/registro', data),
-        login: (data) => apiRequest('POST', '/api/login', data),
+        registro: (data) => apiRequest('POST', '/registro', data),
+        login: (data) => apiRequest('POST', '/login', data),
     },
     contacto: {
-        enviar: (data) => apiRequest('POST', '/api/contacto', data),
+        enviar: (data) => apiRequest('POST', '/contacto', data),
     },
     opiniones: {
-        listar: () => apiRequest('GET', '/api/opiniones'),
-        crear: (data) => apiRequest('POST', '/api/opiniones', data),
+        listar: () => apiRequest('GET', '/opiniones'),
+        crear: (data) => apiRequest('POST', '/opiniones', data),
     },
 };

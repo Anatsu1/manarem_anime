@@ -3,90 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Respuestas a las preguntas más frecuentes sobre Manarem: contenido, registro, app y más.">
+    <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/base.css">
-    <link rel="stylesheet" href="/static/css/preg_frec.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
-    <link rel="stylesheet" href="/static/css/colors.css">
+    <link rel="stylesheet" href="/static/css/preg_frec.css">
     <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
-    <title>Manarem - ¡Preguntas Frecuentes!</title>
+    <title>Preguntas frecuentes — Manarem</title>
 </head>
 <body>
-    <header>
-        <nav class="head-grid-container">
-            <h2 id="icono">Manarem</h2>
-            <a class="hipervin"  id="h_home" href="/">Home</a>
-            <a class="hipervin"  id="h_recomendados" href="/recomend">Recomendados</a>
-            <a class="hipervin"  id="h_musica" href="/musica">Musica</a>
-            <a class="hipervin"  id="h_productos" href="/productos">Productos</a>
-            <div id="h_divotros" class="drop_otros">
-                <div class="hipervin" id="h_otros">Otros</div>
-                <div class="drop_otros_conten">
-                    <a class="hipervin" href="/acerca-de">Acerca de</a>
-                    <a class="hipervin" href="/contacto">Contacto</a>
-                    <a class="hipervin" href="/preguntas-frecuentes">Preguntas Frecuentes</a>
-                    <a class="hipervin" href="/opiniones">Opiniones</a>
+    <main>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Preguntas frecuentes</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>¿Tienen "esta" novela o manga?</summary>
+                        <p>Si querés saber si tenemos cierto título, explorá nuestras secciones de recomendados y música. Si no encontrás lo que buscas es porque aún no lo hemos agregado a nuestro catálogo.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>¿Tienen PDFs para descargar?</summary>
+                        <p>No contamos con PDFs en la página por el momento. Esperamos incorporar esa funcionalidad más adelante.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>¿Tienen una app?</summary>
+                        <p>No tenemos una app. Por ahora solo tenemos la página web, optimizada para que la disfrutes tanto en computadoras como en dispositivos móviles.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>¿Cómo me registro en la página?</summary>
+                        <p>Podés registrarte gratis desde la sección Registrarse. Solo necesitás un correo electrónico y crear una contraseña. Una vez registrado, podrás acceder a todas las funcionalidades.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>¿Los enlaces a animes y mangas son oficiales?</summary>
+                        <p>Siempre priorizamos enlaces a plataformas oficiales como Crunchyroll. Cuando un título no está disponible en servicios oficiales, incluimos alternativas para que igual puedas disfrutarlo.</p>
+                    </details>
                 </div>
-            </div> 
-            <a class="hipervin"  id="h_ingresar" href="/ingresar">Ingresar</a>
-            <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
-        </nav>
-    </header>
-<main><section class="container">
-    <div class="contenedor-acordeon">
-        <h2 id="titulo-preg">Preguntas Frecuentes</h2>
-        <div class="acordeon">
-            <input type="radio" name="acordeon" id="btn-acordeon1" class="btn-acordeon">
-            <label for="btn-acordeon1">
-                ¿Tienen "esta" novela?
-            </label>
-            <div class="contenido-acordeon">
-                <p>Si quieres saber qué novelas tenemos solo ingresa en nuestro Buscador. El mismo se encuentra en la parte superior derecha, en el ícono en forma de lupa. Si no encuentras la novela que buscas es porque aun no la tenemos.</p>
             </div>
-        </div>
-        <div class="acordeon">
-         <input type="radio" name="acordeon" id="btn-acordeon2" class="btn-acordeon">
-         <label for="btn-acordeon2">
-             ¿Tienen PDFs?
-         </label>
-         <div class="contenido-acordeon">
-             <p>No tenemos PDFs en la página, pronto lo haremos.</p>
-         </div>
-     </div>
-     <div class="acordeon">
-         <input type="radio" name="acordeon" id="btn-acordeon3" class="btn-acordeon">
-         <label for="btn-acordeon3">
-             ¿Tienen una App?
-         </label>
-         <div class="contenido-acordeon">
-             <p>No tenemos una app. No es viable por el momento tenerla para nosotros.Solo tenemos una página web.</p>
-         </div>
-     </div>
-     <div class="acordeon">
-         <input type="radio" name="acordeon" id="btn-acordeon4" class="btn-acordeon">
-         <label for="btn-acordeon4">
-             ¿Cómo me suscribo a la página?
-         </label>
-         <div class="contenido-acordeon">
-             <p>Puedes hacerlo desde la sección "Suscríbete".
-                Recuerda que necesitas tener una cuenta en gmail, outlook o html. La suscripción es gratis. Te esperamos.</p>
-         </div>
-     </div>
- </div>
-</section>
-</main>
-    <footer class="footer">
-        <div class="footer-contenido">
-            <p class="footer-copy">&copy; 2024 Manarem. Todos los derechos reservados.</p>
-            <p class="footer-tech">Hecho con HTML5, CSS3, JavaScript y Python</p>
-            <div class="footer-autores">
-                <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/JohnCVF9" target="_blank" rel="noopener">John CV</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/Quiroz-Monica-R" target="_blank" rel="noopener">Monica Quiroz</a>
-            </div>
-        </div>
-    </footer>
+        </section>
+    </main>
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/app.js"></script>
 </body>
-</html> 
+</html>

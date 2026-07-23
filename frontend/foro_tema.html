@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tema del foro de Manarem: leé y participá en las discusiones sobre animes, mangas y música.">
+    <link rel="stylesheet" href="/static/css/colors.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/formulario.css">
+    <link rel="stylesheet" href="/static/css/foro.css">
+    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
+    <title>Tema — Manarem</title>
+</head>
+<body>
+    <main>
+        <section class="section">
+            <div class="container">
+                <div id="tema-detalle"></div>
+
+                <h3 class="respuestas-titulo" id="respuestas-titulo"></h3>
+                <div id="respuestas-list"></div>
+
+                <h3>Responder</h3>
+                <div id="form-respuesta-wrap"></div>
+
+                <a class="foro-back" href="/foro">&larr; Volver al foro</a>
+            </div>
+        </section>
+    </main>
+    <script src="/static/js/mock-data.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script>
+        async function cargarDetalle() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            const detalleDiv = document.getElementById('tema-detalle');
+            const respTitulo = document.getElementById('respuestas-titulo');
+            const respList = document.getElementById('respuestas-list');
+
+            const result = await api.foro.obtenerTema(id);
+
+            if (result.error) {
+                detalleDiv.innerHTML = '<div class="foro-aviso">Tema no encontrado. <a href="/foro">Volver al foro</a></div>';
+                respTitulo.style.display = 'none';
+                return;
+            }
+
+            const t = result;
+            detalleDiv.innerHTML = `
+                <article class="tema-detalle-card">
+                    <h2>${t.titulo}</h2>
+                    <div class="tema-meta">
+                        <span class="tema-badge tema-badge--${t.categoria}">${t.categoria}</span>
+                        <span>por ${t.autor}</span>
+                        <time datetime="${t.fecha}">${t.fecha}</time>
+                    </div>
+                    <p class="tema-contenido">${t.contenido}</p>
+                </article>
+            `;
+
+            const n = t.respuestas.length;
+            respTitulo.textContent = 'Respuestas (' + n + ')';
+            respList.innerHTML = t.respuestas.map(r => `
+                <article class="respuesta-card">
+                    <header class="respuesta-head"><strong>${r.autor}</strong><time datetime="${r.fecha}">${r.fecha}</time></header>
+                    <p>${r.contenido}</p>
+                </article>
+            `).join('');
+
+            setupFormRespuesta(id);
+        }
+
+        function setupFormRespuesta(id) {
+            const wrap = document.getElementById('form-respuesta-wrap');
+            const user = checkAuth();
+            if (!user) {
+                wrap.innerHTML = '<div class="foro-aviso">Para responder tenes que <a href="/ingresar">iniciar sesion</a>.</div>';
+                return;
+            }
+            wrap.innerHTML = `
+                <div class="form-card form-card--wide">
+                    <form id="formRespuesta">
+                        <div class="form-group">
+                            <label for="contenidoRespuesta">Tu respuesta</label>
+                            <textarea id="contenidoRespuesta" name="contenido" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Responder</button>
+                    </form>
+                </div>
+            `;
+
+            document.getElementById('formRespuesta').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const data = {
+                    contenido: document.getElementById('contenidoRespuesta').value,
+                };
+                const result = await api.foro.responder(id, data);
+                if (result.error) {
+                    showAlert('Error: ' + result.error, 'error');
+                } else {
+                    showAlert('Respuesta publicada!', 'success');
+                    cargarDetalle();
+                }
+            });
+        }
+
+        cargarDetalle();
+    </script>
+</body>
+</html>

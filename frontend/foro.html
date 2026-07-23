@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foro de la comunidad de Manarem: debatí sobre animes, mangas, música y más.">
+    <link rel="stylesheet" href="/static/css/colors.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/formulario.css">
+    <link rel="stylesheet" href="/static/css/foro.css">
+    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
+    <title>Foro — Manarem</title>
+</head>
+<body>
+    <main>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Foro de la comunidad</h2>
+                <p class="text-muted">Debati y comparti tus opiniones sobre animes, mangas, musica y mas con la comunidad.</p>
+                <div id="temas-list" class="temas-list"></div>
+
+                <h3>Crear un tema nuevo</h3>
+                <div id="form-tema-wrap"></div>
+            </div>
+        </section>
+    </main>
+    <script src="/static/js/mock-data.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script>
+        async function cargarTemas() {
+            const lista = document.getElementById('temas-list');
+            const temas = await api.foro.listarTemas();
+            lista.innerHTML = temas.map(t => `
+                <article class="tema-card">
+                    <a class="tema-titulo" href="/foro/tema?id=${t.id}"><h3>${t.titulo}</h3></a>
+                    <div class="tema-meta">
+                        <span class="tema-badge tema-badge--${t.categoria}">${t.categoria}</span>
+                        <span>por ${t.autor}</span>
+                        <time datetime="${t.fecha}">${t.fecha}</time>
+                        <span class="tema-respuestas">${t.respuestas} respuestas</span>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function setupFormTema() {
+            const wrap = document.getElementById('form-tema-wrap');
+            const user = checkAuth();
+            if (!user) {
+                wrap.innerHTML = '<div class="foro-aviso">Para crear un tema tenes que <a href="/ingresar">iniciar sesion</a>.</div>';
+                return;
+            }
+            wrap.innerHTML = `
+                <div class="form-card form-card--wide">
+                    <form id="formTema">
+                        <div class="form-group">
+                            <label for="titulo">Titulo</label>
+                            <input type="text" id="titulo" name="titulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoria">Categoria</label>
+                            <select id="categoria" name="categoria" required>
+                                <option value="anime">anime</option>
+                                <option value="manga">manga</option>
+                                <option value="musica">musica</option>
+                                <option value="general">general</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contenido">Contenido</label>
+                            <textarea id="contenido" name="contenido" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Publicar tema</button>
+                    </form>
+                </div>
+            `;
+
+            document.getElementById('formTema').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const data = {
+                    titulo: document.getElementById('titulo').value,
+                    categoria: document.getElementById('categoria').value,
+                    contenido: document.getElementById('contenido').value,
+                };
+                const result = await api.foro.crearTema(data);
+                if (result.error) {
+                    showAlert('Error: ' + result.error, 'error');
+                } else {
+                    showAlert('Tema creado con exito!', 'success');
+                    e.target.reset();
+                    cargarTemas();
+                }
+            });
+        }
+
+        cargarTemas();
+        setupFormTema();
+    </script>
+</body>
+</html>

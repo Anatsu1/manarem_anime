@@ -1,0 +1,159 @@
+.temas-list {
+    display: grid;
+    gap: var(--space-md);
+    max-width: 820px;
+    margin-bottom: var(--space-xl);
+}
+
+.tema-card {
+    padding: var(--space-lg);
+    background: var(--main-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.tema-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.tema-titulo {
+    text-decoration: none;
+}
+
+.tema-titulo h3 {
+    font-size: 1.2rem;
+    transition: color var(--transition-fast);
+}
+
+.tema-titulo:hover h3 {
+    color: var(--letter-hover);
+}
+
+.tema-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: var(--space-sm);
+}
+
+.tema-badge {
+    padding: 0.15em 0.9em;
+    border-radius: var(--radius-pill);
+    border: 1px solid;
+    text-transform: capitalize;
+}
+
+.tema-badge--anime {
+    border-color: var(--letter-hover);
+    color: var(--letter-hover);
+}
+
+.tema-badge--manga {
+    border-color: var(--accent-strong);
+    color: var(--accent-strong);
+}
+
+.tema-badge--musica {
+    border-color: var(--letter-color);
+    color: var(--letter-color);
+}
+
+.tema-badge--general {
+    border-color: var(--text-muted);
+    color: var(--text-muted);
+}
+
+.tema-respuestas {
+    margin-left: auto;
+}
+
+.tema-detalle-card {
+    padding: var(--space-lg);
+    background: var(--main-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    max-width: 820px;
+}
+
+.tema-contenido {
+    margin-top: var(--space-md);
+    color: var(--text-body);
+}
+
+.respuestas-titulo {
+    margin-block: var(--space-lg) var(--space-md);
+}
+
+.respuesta-card {
+    padding: var(--space-md) var(--space-lg);
+    background: var(--surface-glass);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-sm);
+    max-width: 820px;
+}
+
+.respuesta-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+.respuesta-head time {
+    color: var(--text-muted);
+}
+
+.foro-aviso {
+    padding: var(--space-lg);
+    background: var(--input-bg);
+    border: 1px dashed var(--border-light);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+}
+
+.foro-aviso a {
+    color: var(--letter-hover);
+}
+
+.foro-back {
+    display: inline-block;
+    margin-top: var(--space-md);
+    color: var(--letter-hover);
+}
+
+#respuestas-list {
+    max-width: 820px;
+}
+
+#form-tema-wrap,
+#form-respuesta-wrap {
+    max-width: 820px;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 0.7em 1em;
+    background: var(--input-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    color: var(--text-body);
+    transition: border-color var(--transition-fast);
+    box-sizing: border-box;
+}
+
+.form-group select:focus {
+    border-color: var(--letter-hover);
+    outline: none;
+}
+
+.form-group select option {
+    background: var(--form-bg);
+    color: var(--text-body);
+}

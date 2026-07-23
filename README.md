@@ -11,8 +11,8 @@ Plataforma web para descubrir y recomendar animes, mangas y música relacionada.
 
 ### Backend
 - **Python 3** + **Flask** (API REST)
-- **MySQL** (migrando a PostgreSQL)
-- **Werkzeug** (subida de archivos)
+- **SQLite** (etapa actual; PostgreSQL previsto)
+- **Werkzeug** (hash de contraseñas)
 
 ## Inicio rápido
 
@@ -82,21 +82,21 @@ manarem_anime/
 | `/opiniones` | opiniones.html |
 | `/preguntas-frecuentes` | preg_frec.html |
 | `/acerca-de` | acerca_de.html |
-| `/productos` | productos.html |
-| `/productos/altas` | altas.html |
-| `/productos/listado` | listado.html |
-| `/productos/modificar` | modificaciones.html |
-| `/productos/eliminar` | listadoEliminar.html |
+| `/foro` | foro.html |
+| `/foro/tema?id=N` | foro_tema.html |
 
 ## API
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| GET | `/productos` | Listar productos |
-| GET | `/productos/<codigo>` | Obtener producto |
-| POST | `/productos` | Crear producto |
-| PUT | `/productos/<codigo>` | Modificar producto |
-| DELETE | `/productos/<codigo>` | Eliminar producto |
+| POST | `/registro` | Crear usuario |
+| POST | `/login` | Iniciar sesión (devuelve token) |
+| GET | `/foro/temas` | Listar temas del foro |
+| POST | `/foro/temas` | Crear tema (requiere token) |
+| GET | `/foro/temas/<id>` | Tema con respuestas |
+| POST | `/foro/temas/<id>/respuestas` | Responder (requiere token) |
+
+El frontend funciona sin backend gracias a la capa mock (`MOCK_MODE` en `api.js`). El hero del home carga banners desde la API de AniList (fallback: Jikan, luego imágenes locales).
 
 ## Identidad visual
 

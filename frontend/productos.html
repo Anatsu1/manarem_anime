@@ -1,61 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manarem - Gestión de Productos</title>
-    <link rel="stylesheet" href="/static/css/base.css">
+    <meta name="description" content="Panel de gestión de productos — Manarem">
     <link rel="stylesheet" href="/static/css/colors.css">
-    <link rel="stylesheet" href="/static/css/products_CRUD.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/products_CRUD.css">
     <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
+    <title>Gestión de productos — Manarem</title>
 </head>
-
-
 <body>
-    <header>
-        <nav class="navbar-index ">
-            <img class="logo-nav" src="/static/img/logos-nav.webp" alt="logo agencia de aprendizaje">
-        </nav>
-    </header>
-
-
     <main>
-    <div>
-        <div class="logo-centrado">
-            <img src="/static/img/logo_Codo.jpg" alt="Logo">
-        </div>
-        <h1>Ejemplos de uso de la API</h1><br>
-        <table>
-            <tr>
-                <td class="contenedor-centrado"><a href="/productos/altas">Alta de productos</a></td>
-            </tr>
-            <tr>
-                <td class="contenedor-centrado "><a href="/productos/listado">Listado de productos</a></td>
-            </tr>
-            <tr>
-                <td class="contenedor-centrado "><a href="/productos/modificar">Modificar datos de productos</a></td>
-            </tr>
-            <tr>
-                <td class="contenedor-centrado "><a href="/productos/eliminar">Eliminar productos</a></td>
-            </tr>
-        </table>
-    </div>
-    </main>
-    <footer class="footer">
-        <div class="footer-contenido">
-            <p class="footer-copy">&copy; 2024 Manarem. Todos los derechos reservados.</p>
-            <p class="footer-tech">Hecho con HTML5, CSS3, JavaScript y Python</p>
-            <div class="footer-autores">
-                <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/JohnCVF9" target="_blank" rel="noopener">John CV</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/Quiroz-Monica-R" target="_blank" rel="noopener">Monica Quiroz</a>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Gestión de productos</h2>
+                <p class="text-muted">Panel demo del CRUD contra la API REST.</p>
+                <div class="crud-menu">
+                    <a class="crud-menu-card" href="/productos/altas">Alta de productos</a>
+                    <a class="crud-menu-card" href="/productos/listado">Listado de productos</a>
+                    <a class="crud-menu-card" href="/productos/modificar">Modificar productos</a>
+                    <a class="crud-menu-card" href="/productos/eliminar">Eliminar productos</a>
+                </div>
             </div>
-        </div>
-    </footer>
+        </section>
+    </main>
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/app.js"></script>
 </body>
-
 </html>

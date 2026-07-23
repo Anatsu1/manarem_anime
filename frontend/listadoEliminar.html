@@ -1,80 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliminar Productos 🚀</title>
-    <link rel="stylesheet" href="/static/css/base.css">
+    <meta name="description" content="Eliminar productos — Manarem">
     <link rel="stylesheet" href="/static/css/colors.css">
-    <link rel="stylesheet" href="/static/css/products_CRUD.css">
-    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/base.css">
     <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/products_CRUD.css">
+    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
+    <title>Eliminar productos — Manarem</title>
+</head>
+<body>
+    <main>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Eliminar productos</h2>
+                <div class="table-wrap">
+                    <table id="productos-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Imagen</th>
+                                <th>Descripción</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Proveedor</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <a class="crud-back" href="/productos">← Volver al menú</a>
+            </div>
+        </section>
+    </main>
     <script src="/static/js/mock-data.js"></script>
     <script src="/static/js/api.js"></script>
+    <script src="/static/js/components.js"></script>
     <script src="/static/js/app.js"></script>
-    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
-</head>
-
-<body>
-    <header>
-        <div class="head-grid-container">
-            <h2 id="icono">Manarem</h2>
-            <a class="hipervin"  id="h_home" href="/">Home</a>
-            <a class="hipervin"  id="h_recomendados" href="/recomend">Recomendados</a>
-            <a class="hipervin"  id="h_musica" href="/musica">Musica</a>
-            <a class="hipervin"  id="h_productos" href="/productos">Productos</a>
-            <div id="h_divotros" class="drop_otros">
-                <div class="hipervin" id="h_otros">Otros</div>
-                <div class="drop_otros_conten">
-                    <a class="hipervin" href="/acerca-de">Acerca de</a>
-                    <a class="hipervin" href="/contacto">Contacto</a>
-                    <a class="hipervin" href="/preguntas-frecuentes">Preguntas Frecuentes</a>
-                    <a class="hipervin" href="/opiniones">Opiniones</a>
-                </div>
-            </div> 
-            <a class="hipervin"  id="h_ingresar" href="/ingresar">Ingresar</a>
-            <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
-        </div>
-    </header>
-    <main>
-    <h1>Eliminar Productos del Inventario</h1><br>
-
-    <table id="productos-table"> <!-- Se crea una tabla para mostrar los productos. -->
-        <thead> <!--Encabezado de la tabla con columnas para código, descripción, cantidad, precio y acciones.-->
-            <tr>
-                <th>Código</th>
-                <th>Descripción</th>
-                <th>Cantidad</th>
-                <th align="right">Precio</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table><br>
-
-    <div class="contenedor-centrado">
-        <a href="/productos">Menu principal</a>
-    </div>
-    </main>
-
     <script>
         async function obtenerProductos() {
             try {
                 const data = await api.productos.listar();
-                const productosTable = document.getElementById('productos-table').getElementsByTagName('tbody')[0];
-                productosTable.innerHTML = '';
+                const tbody = document.getElementById('productos-table').querySelector('tbody');
+                tbody.innerHTML = '';
                 data.forEach(producto => {
-                    const row = productosTable.insertRow();
-                    row.innerHTML = `
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
                         <td>${producto.codigo}</td>
+                        <td><img class="thumb" src="/static/img/${producto.imagen_url}" alt="${producto.descripcion}"></td>
                         <td>${producto.descripcion}</td>
                         <td>${producto.cantidad}</td>
-                        <td align="right">${producto.precio}</td>
-                        <td><button onclick="eliminarProducto('${producto.codigo}')">Eliminar</button></td>
+                        <td>$${Number(producto.precio).toFixed(2)}</td>
+                        <td>${producto.proveedor}</td>
+                        <td><button class="btn-danger" onclick="eliminarProducto('${producto.codigo}')">Eliminar</button></td>
                     `;
+                    tbody.appendChild(fila);
                 });
             } catch (error) {
                 showAlert('Error al obtener los productos.', 'error');
@@ -99,18 +83,5 @@
 
         document.addEventListener('DOMContentLoaded', obtenerProductos);
     </script>
-    <footer class="footer">
-        <div class="footer-contenido">
-            <p class="footer-copy">&copy; 2024 Manarem. Todos los derechos reservados.</p>
-            <p class="footer-tech">Hecho con HTML5, CSS3, JavaScript y Python</p>
-            <div class="footer-autores">
-                <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/JohnCVF9" target="_blank" rel="noopener">John CV</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/Quiroz-Monica-R" target="_blank" rel="noopener">Monica Quiroz</a>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

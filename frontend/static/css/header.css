@@ -119,7 +119,6 @@
     transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
 }
 
-.nav-drop:hover .nav-drop-panel,
 .nav-drop.is-open .nav-drop-panel {
     opacity: 1;
     visibility: visible;

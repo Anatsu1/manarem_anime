@@ -42,7 +42,7 @@ const FOOTER_HTML = `
         </nav>
         <div class="footer-authors">
             <p>Creado por</p>
-            <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Fernandez Carbonell</a>
+            <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
             <a href="https://github.com/JohnCVF9" target="_blank" rel="noopener">John CV</a>
             <a href="https://github.com/Quiroz-Monica-R" target="_blank" rel="noopener">Monica Quiroz</a>
         </div>
@@ -70,10 +70,16 @@ function renderLayout() {
     });
 
     const dropBtn = document.querySelector('.nav-drop-btn');
+    const drop = dropBtn.parentElement;
     dropBtn.addEventListener('click', () => {
-        const drop = dropBtn.parentElement;
         const open = drop.classList.toggle('is-open');
         dropBtn.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', (e) => {
+        if (!drop.contains(e.target) && drop.classList.contains('is-open')) {
+            drop.classList.remove('is-open');
+            dropBtn.setAttribute('aria-expanded', 'false');
+        }
     });
 }
 

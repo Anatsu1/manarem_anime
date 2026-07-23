@@ -1,70 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar producto 🚀</title>
-    <link rel="stylesheet" href="/static/css/base.css">
+    <meta name="description" content="Alta de productos en el catálogo de Manarem.">
     <link rel="stylesheet" href="/static/css/colors.css">
-    <link rel="stylesheet" href="/static/css/products_CRUD.css">
-    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/base.css">
     <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/formulario.css">
+    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
+    <title>Alta de producto — Manarem</title>
+</head>
+<body>
+    <main>
+        <section class="form-section">
+            <div class="container">
+                <div class="form-card">
+                    <h1>Alta de producto</h1>
+                    <p class="form-sub">Cargá un producto nuevo en el catálogo.</p>
+                    <form id="formulario" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" id="descripcion" name="descripcion" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" id="cantidad" name="cantidad" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="precio">Precio</label>
+                            <input type="number" step="0.01" id="precio" name="precio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagenProducto">Imagen del producto</label>
+                            <input type="file" id="imagenProducto" name="imagen">
+                        </div>
+                        <div class="form-group">
+                            <label for="proveedorProducto">Proveedor</label>
+                            <input type="text" id="proveedorProducto" name="proveedor">
+                        </div>
+                        <button type="submit" class="btn">Crear producto</button>
+                    </form>
+                    <p class="form-alt"><a href="/productos">← Volver al menú</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
     <script src="/static/js/mock-data.js"></script>
     <script src="/static/js/api.js"></script>
+    <script src="/static/js/components.js"></script>
     <script src="/static/js/app.js"></script>
-    <link rel="icon" href="/static/img/Aqua-Bored-favicon.ico" type="image/x-icon">
-</head>
-
-<body>
-    <header>
-        <div class="head-grid-container">
-            <h2 id="icono">Manarem</h2>
-            <a class="hipervin"  id="h_home" href="/">Home</a>
-            <a class="hipervin"  id="h_recomendados" href="/recomend">Recomendados</a>
-            <a class="hipervin"  id="h_musica" href="/musica">Musica</a>
-            <a class="hipervin"  id="h_productos" href="/productos">Productos</a>
-            <div id="h_divotros" class="drop_otros">
-                <div class="hipervin" id="h_otros">Otros</div>
-                <div class="drop_otros_conten">
-                    <a class="hipervin" href="/acerca-de">Acerca de</a>
-                    <a class="hipervin" href="/contacto">Contacto</a>
-                    <a class="hipervin" href="/preguntas-frecuentes">Preguntas Frecuentes</a>
-                    <a class="hipervin" href="/opiniones">Opiniones</a>
-                </div>
-            </div> 
-            <a class="hipervin"  id="h_ingresar" href="/ingresar">Ingresar</a>
-            <a class="hipervin"  id="h_registrarse" href="/registrarse">Registrarse</a>
-        </div>
-    </header>
-    <main>
-    <h1>Agregar Productos al Inventario</h1><br>
-
-    <!--enctype="multipart/form-data" es necesario para enviar archivos al back.-->
-    <form id="formulario" enctype="multipart/form-data">
-        
-        <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" name="descripcion" required><br>
-
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" required><br>
-
-        <label for="precio">Precio:</label>
-        <input type="number" step="0.01" id="precio" name="precio" required><br>
-
-        <label for="imagenProducto">Imagen del producto:</label>
-        <input type="file" id="imagenProducto" name="imagen">
-
-        <br><br>
-        <label for="proveedorProducto">Proveedor:</label>
-        <input type="text" id="proveedorProducto" name="proveedor">
-        
-        <button type="submit">Agregar Producto</button>
-        <a href="/productos">Menu principal</a>
-    </form>
-    </main>
-
     <script>
         document.getElementById('formulario').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -82,19 +68,5 @@
             }
         });
     </script>
-    <footer class="footer">
-        <div class="footer-contenido">
-            <p class="footer-copy">&copy; 2024 Manarem. Todos los derechos reservados.</p>
-            <p class="footer-tech">Hecho con HTML5, CSS3, JavaScript y Python</p>
-            <div class="footer-autores">
-                <a href="https://github.com/an4tsu" target="_blank" rel="noopener">Cesar Augusto Fernandez Carbonell</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/JohnCVF9" target="_blank" rel="noopener">John CV</a>
-                <span class="footer-sep">&bull;</span>
-                <a href="https://github.com/Quiroz-Monica-R" target="_blank" rel="noopener">Monica Quiroz</a>
-            </div>
-        </div>
-    </footer>
 </body>
-
 </html>
